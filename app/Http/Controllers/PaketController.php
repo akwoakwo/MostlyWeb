@@ -17,4 +17,13 @@ class PaketController extends Controller
             'subpaket' => Subpaket::all(),
         ]);
     }
+
+    public function index()
+    {
+        return view('admin.paket.index', [
+            'title' => 'index',
+            'paket' => Paket::all(),
+            'subpaket' => Subpaket::all(),
+        ]);
+    }
 }

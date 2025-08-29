@@ -17,7 +17,7 @@
                     <span class="hide-menu">Home</span>
                 </li>
                 <li class="sidebar-item">
-                    <a class="sidebar-link" href="#" aria-expanded="false">
+                    <a class="sidebar-link {{ request()->is('/') ? 'active' : '' }}" href="/dashboard" aria-expanded="false">
                         <span>
                             <i class="ti ti-layout-dashboard"></i>
                         </span>
@@ -51,7 +51,7 @@
                     <span class="hide-menu">Katalog</span>
                 </li>
                 <li class="sidebar-item">
-                    <a class="sidebar-link" href="#" aria-expanded="false">
+                    <a class="sidebar-link {{ request()->is('/paket') ? 'active' : '' }}" href="/paket" aria-expanded="false">
                         <span>
                             <i class="ti ti-package"></i>
                         </span>

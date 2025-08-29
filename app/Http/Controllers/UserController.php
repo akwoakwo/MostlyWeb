@@ -44,7 +44,14 @@ class UserController extends Controller
 
         if (Auth::attempt($credentials, $request->remember)) {
             $request->session()->regenerate();
-            return redirect()->route('index')->with('success', 'Login berhasil');
+
+            $user = Auth::user();
+
+            if ($user->role === 'admin') {
+                return redirect()->route('dashboard')->with('success', 'Login berhasil sebagai Admin');
+            } elseif ($user->role === 'customer') {
+                return redirect()->route('index')->with('success', 'Login berhasil');
+            }
         }
 
         return back()->withErrors([
@@ -100,5 +107,10 @@ class UserController extends Controller
         $user->save();
 
         return back()->with('success', 'Profil berhasil diperbarui.');
+    }
+
+    public function dashboard()
+    {
+        return view('admin.dashboard');
     }
 }
