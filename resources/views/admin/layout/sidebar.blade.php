@@ -1,0 +1,116 @@
+<aside class="left-sidebar">
+    <!-- Sidebar scroll-->
+    <div>
+        <div class="brand-logo d-flex align-items-center justify-content-between">
+            <a href="#" class="text-nowrap logo-img">
+                <img src="{{ asset('modernize/src/assets/images/logos/dark-logo.svg') }}" width="180" alt="" />
+            </a>
+            <div class="close-btn d-xl-none d-block sidebartoggler cursor-pointer" id="sidebarCollapse">
+                <i class="ti ti-x fs-8"></i>
+            </div>
+        </div>
+        <!-- Sidebar navigation-->
+        <nav class="sidebar-nav scroll-sidebar" data-simplebar="">
+            <ul id="sidebarnav">
+                <li class="nav-small-cap">
+                    <i class="ti ti-dots nav-small-cap-icon fs-4"></i>
+                    <span class="hide-menu">Home</span>
+                </li>
+                <li class="sidebar-item">
+                    <a class="sidebar-link" href="#" aria-expanded="false">
+                        <span>
+                            <i class="ti ti-layout-dashboard"></i>
+                        </span>
+                        <span class="hide-menu">Dashboard</span>
+                    </a>
+                </li>
+
+                <li class="nav-small-cap">
+                    <i class="ti ti-dots nav-small-cap-icon fs-4"></i>
+                    <span class="hide-menu">Pesanan</span>
+                </li>
+                <li class="sidebar-item">
+                    <a class="sidebar-link" href="#" aria-expanded="false">
+                        <span>
+                            <i class="ti ti-shopping-cart"></i>
+                        </span>
+                        <span class="hide-menu">Pembelian</span>
+                    </a>
+                </li>
+                <li class="sidebar-item">
+                    <a class="sidebar-link" href="#" aria-expanded="false">
+                        <span>
+                            <i class="ti ti-credit-card"></i>
+                        </span>
+                        <span class="hide-menu">Pembayaran</span>
+                    </a>
+                </li>
+
+                <li class="nav-small-cap">
+                    <i class="ti ti-dots nav-small-cap-icon fs-4"></i>
+                    <span class="hide-menu">Katalog</span>
+                </li>
+                <li class="sidebar-item">
+                    <a class="sidebar-link" href="#" aria-expanded="false">
+                        <span>
+                            <i class="ti ti-package"></i>
+                        </span>
+                        <span class="hide-menu">Paket</span>
+                    </a>
+                </li>
+                <li class="sidebar-item">
+                    <a class="sidebar-link" href="#" aria-expanded="false">
+                        <span>
+                            <i class="ti ti-tag"></i>
+                        </span>
+                        <span class="hide-menu">Sub Paket</span>
+                    </a>
+                </li>
+
+                <li class="nav-small-cap">
+                    <i class="ti ti-dots nav-small-cap-icon fs-4"></i>
+                    <span class="hide-menu">Template</span>
+                </li>
+                <li class="sidebar-item">
+                    <a class="sidebar-link" href="#" aria-expanded="false">
+                        <span>
+                            <i class="ti ti-folder"></i>
+                        </span>
+                        <span class="hide-mwnu">Jenis Website</span>
+                    </a>
+                </li>
+                <li class="sidebar-item">
+                    <a class="sidebar-link" href="#" aria-expanded="false">
+                        <span>
+                            <i class="ti ti-palette"></i>
+                        </span>
+                        <span class="hide-menu">Desain Website</span>
+                    </a>
+                </li>
+
+                <li class="nav-small-cap">
+                    <i class="ti ti-dots nav-small-cap-icon fs-4"></i>
+                    <span class="hide-menu">Profil Admin</span>
+                </li>
+                <li class="sidebar-item">
+                    <a class="sidebar-link" href="#" aria-expanded="false">
+                        <span>
+                            <i class="ti ti-id-badge"></i>
+                        </span>
+                        <span class="hide-menu">Register Admin</span>
+                    </a>
+                </li>
+                <li class="sidebar-item">
+                    <a class="sidebar-link" href="#" aria-expanded="false">
+                        <span>
+                            <i class="ti ti-settings"></i>
+                        </span>
+                        <span class="hide-menu">Pengaturan</span>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+        <!-- End Sidebar navigation -->
+    </div>
+    <!-- End Sidebar scroll-->
+</aside>

@@ -1,0 +1,446 @@
+:root {
+    --primary-color: #FF7F50;
+    --secondary-color: #342C54;
+    --orange-color: #FFEACD;
+    --red-color: #FFCDDC;
+    --blue-color: #CDF8FF;
+    --yellow-color: #F5FFCD;
+    --green-color: #D8FFCD;
+    --white-color: #ffffff;
+    --black-color: #000000;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    padding-top: 70px;
+}
+
+/* Navbar */
+nav {
+    background-color: var(--orange-color);
+}
+
+.text-most {
+    color: var(--secondary-color);
+}
+
+.text-web {
+    color: var(--primary-color);
+}
+
+.nav-menu {
+    color: var(--black-color);
+}
+
+.nav-menu:hover {
+    color: var(--primary-color);
+}
+
+.navbar-toggler {
+    border: none;
+}
+
+.navbar-toggler:focus {
+    box-shadow: none;
+}
+
+.login-btn {
+    background-color: var(--secondary-color);
+    color: var(--white-color);
+}
+
+.login-btn:hover {
+    background-color: var(--primary-color);
+    color: var(--white-color);
+}
+
+.btn-google:hover {
+    background-color: var(--secondary-color);
+}
+
+.register-btn {
+    background-color: var(--primary-color);
+    color: var(--white-color);
+}
+
+.register-btn:hover {
+    background-color: var(--secondary-color) !important;
+    color: var(--white-color);
+}
+
+
+/* Content */
+
+/* Carousel */
+.home-container {
+    background-color: var(--orange-color);
+    border-radius: 10px;
+}
+
+.home-button {
+    background-color: var(--secondary-color);
+    color: var(--white-color);
+}
+
+.home-button:hover {
+    background-color: var(--primary-color);
+    color: var(--white-color);
+}
+
+/* Tools Animation */
+.tools-section {
+    overflow: hidden;
+    position: relative;
+    background-color: var(--white-color);
+}
+
+.slider {
+    height: 100px;
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+    position: relative;
+}
+
+.slide-track {
+    display: flex;
+    width: calc(250px * 12);
+    animation: scroll 30s linear infinite;
+}
+
+.slide {
+    width: 250px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+}
+
+.slide img {
+    max-width: 120px;
+    max-height: 60px;
+    object-fit: contain;
+}
+
+@keyframes scroll {
+    0% {
+        transform: translateX(0);
+    }
+
+    100% {
+        transform: translateX(-50%);
+    }
+}
+
+/* Profil */
+.profil-section {
+    background-color: var(--white-color);
+}
+
+.profil-card1 {
+    background-color: var(--orange-color);
+}
+
+.profil-img1 {
+    flex: 0 0 120px;
+}
+
+.profil-img1 img {
+    width: 200px;
+    height: auto;
+}
+
+.profil-desc {
+    flex: 1;
+}
+
+.profil-card2 {
+    background-color: var(--red-color);
+}
+
+.profil-img2 {
+    height: 80px;
+}
+
+.profil-card3 {
+    background-color: var(--blue-color);
+}
+
+.profil-img3 {
+    height: 80px;
+}
+
+.profil-card4 {
+    background-color: var(--orange-color);
+}
+
+.profil-img4 {
+    height: 80px;
+}
+
+.profil-card5 {
+    background-color: var(--yellow-color);
+}
+
+.profil-img5 {
+    height: 80px;
+}
+
+.profil-card6 {
+    background-color: var(--green-color);
+    min-height: 100%;
+}
+
+.profil-img6 {
+    width: 100%;
+}
+
+/* Paket */
+.nav-paket {
+    background-color: #ddd;
+    color: var(--black-color);
+    margin: 0 10px;
+}
+
+.nav-paket:hover {
+    background-color: var(--secondary-color);
+    color: var(--white-color);
+}
+
+.nav-paket.active {
+    background-color: var(--secondary-color) !important;
+    color: var(--white-color) !important;
+}
+
+.btn-paket {
+    background-color: var(--secondary-color);
+    color: var(--white-color);
+}
+
+.btn-paket:hover {
+    background-color: var(--primary-color);
+    color: var(--white-color);
+}
+
+/* Produk */
+.kategori-box {
+    width: 70px;
+    height: 200px;
+    background: #f8f9fa;
+    border: 2px solid #ddd;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    writing-mode: vertical-rl;
+    transform: rotate(180deg);
+    font-weight: 600;
+    transition: all 0.3s ease;
+    margin: 0 15px;
+}
+
+.kategori-box:hover,
+.kategori-box.active-kategori {
+    background: var(--primary-color);
+    color: var(--white-color);
+}
+
+.btn-produk {
+    border-color: var(--secondary-color);
+}
+
+.btn-produk:hover {
+    background-color: var(--secondary-color);
+    color: var(--white-color);
+}
+
+/* Preview Produk */
+.carousel-item img {
+  height: 100vh; /* penuh tinggi layar */
+  object-fit: cover; /* biar gambar tidak gepeng */
+}
+
+/* Kontak */
+.container-konsultasi {
+    background-color: var(--secondary-color);
+}
+
+.btn-konsultasi:hover {
+    background-color: var(--primary-color);
+    color: var(--white-color);
+}
+
+
+/* Footer */
+.footer-atas {
+    background-color: var(--orange-color);
+}
+
+.scroll-to-top {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background-color: var(--secondary-color);
+    color: var(--white-color);
+    font-size: 24px;
+    width: 50px;
+    height: 50px;
+    text-align: center;
+    line-height: 50px;
+    border-radius: 50%;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+    z-index: 9999;
+    text-decoration: none;
+    transition: 0.3s;
+    display: none;
+}
+
+.scroll-to-top:hover {
+    background-color: #084298;
+    transform: scale(1.1);
+}
+
+
+/* Halaman Customer */
+.page-customer {
+    padding: 0;
+}
+
+.sidebar-customer {
+    background-color: var(--orange-color);
+    position: fixed;
+    top: 0;
+    left: 0;
+    transition: transform 0.3s ease;
+    z-index: 1040;
+}
+
+.sidebar-img {
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+}
+
+.sidebar-item {
+  font-size: 15px;
+  color: var(--black-color);
+  border-radius: 5px;
+}
+
+.sidebar-item:hover {
+    background-color: var(--secondary-color);
+    color: var(--white-color);
+}
+
+.sidebar-item.active {
+    background: linear-gradient(90deg, var(--white-color), var(--orange-color));
+    color: var(--black-color);
+}
+
+.sidebar-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.5);
+    z-index: 1030;
+}
+
+.btn-customer {
+    background-color: var(--secondary-color);
+    color: var(--white-color);
+}
+
+.btn-customer:hover {
+    background-color: #ddd;
+    border-color: var(--secondary-color);
+    color: var(--black-color);
+}
+
+#sidebarToggle {
+    position: fixed;
+    top: 10px;
+    left: 10px;
+    z-index: 1050;
+    display: none;
+}
+
+.main-content {
+    margin-left: 250px;
+    transition: margin-left 0.3s ease;
+}
+
+/* Responsive */
+@media (min-width: 992px) {
+    .nav-link {
+        display: block;
+    }
+}
+
+@media (max-width: 769px) {
+    .button-auth {
+        display: flex;
+        justify-content: center;
+        gap: 10px;
+        margin-top: 10px;
+    }
+
+    .profil-baris {
+        margin-left: 0;
+    }
+
+    .sidebar-customer {
+        transform: translateX(-100%);
+    }
+
+    #sidebarToggle {
+        display: block;
+    }
+
+    .main-content {
+        margin-left: 0;
+        margin-top: 40px;
+    }
+}
+
+@media (max-width: 576px) {
+    .nav-pills {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .nav-paket {
+        font-size: 0.9rem;
+        padding: 8px 12px;
+        width: 100%;
+        text-align: center;
+    }
+
+    .kategori-box {
+        width: 45px;
+        height: 120px;
+        font-size: 12px;
+        margin: 0 5px;
+    }
+
+    .d-flex.flex-wrap {
+        flex-wrap: nowrap !important;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+    }
+
+    .btn-konsultasi {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .btn-konsultasi a {
+        width: 100%;
+        max-width: 280px;
+    }
+
+    .profil-baris {
+        margin-left: 0;
+    }
+}
