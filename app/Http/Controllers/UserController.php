@@ -11,6 +11,7 @@ use App\Models\Subpaket;
 use App\Models\Faq;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Models\Review;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
@@ -26,6 +27,7 @@ class UserController extends Controller
             'logo' => Logo::all(),
             'kategori' => Kategori::take(6)->get(),
             'produk' => Produk::all(),
+            'ulasan' => Review::all(),
             'faq' => Faq::all(),
         ]);
     }

@@ -14,10 +14,59 @@ class PaketController extends Controller
 {
     public function index()
     {
-        return view('admin.paket.index', [
+        return view('admin.pages.paket.index', [
             'title' => 'index',
             'paket' => Paket::all(),
             'subpaket' => Subpaket::all(),
         ]);
+    }
+
+    public function store(Request $request) {
+        $request->validate([
+            'nama_paket' => 'required|unique:pakets,nama_paket',
+        ]);
+
+        $data = new Paket();
+        $data->nama_paket = $request->nama_paket;
+
+        if ($data->save()) {
+            return redirect()->back()->with('success', 'Paket baru berhasil ditambahkan!');
+        } else {
+            return redirect()->back()->with('error', 'Nama paket gagal ditambahkan!');
+        }
+    }
+
+    public function show($id)
+    {
+        return view('admin.pages.paket.show', [
+            'title' => 'index',
+            'paket' => Paket::findOrFail($id),
+            'data' => Subpaket::where('paket_id',$id)->get(),
+
+        ]);
+    }
+
+    public function update(Request $request, $id) {
+        $request->validate([
+            'nama_paket' => 'required|unique:pakets,nama_paket',
+        ]);
+
+        $data = Paket::findOrFail($id);
+        $data->nama_paket = $request->nama_paket;
+
+        if ($data->save()) {
+            return redirect()->back()->with('success', 'Nama paket berhasil diupdate!');
+        } else {
+            return redirect()->back()->with('error', 'Nama paket gagal diupdate!');
+        }
+    }
+
+    public function destroy($id) {
+        $data = Paket::findOrFail($id);
+        if ($data->delete()) {
+            return redirect()->back()->with('success', 'Paket berhasil dihapus!');
+        } else {
+            return redirect()->back()->with('error', 'Paket gagal dihapus!');
+        }
     }
 }

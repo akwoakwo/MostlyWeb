@@ -5,12 +5,12 @@
     </div>
     <ul class="nav flex-column">
         <li class="nav-item mb-2">
-            <a href="/profil-user" class="nav-link sidebar-item active">
+            <a href="/profil-user" class="nav-link sidebar-item {{ request()->is('profil-user') ? 'active' : '' }}">
                 <i class="bi bi-person-circle me-2"></i> Pengaturan Profil
             </a>
         </li>
         <li class="nav-item mb-2">
-            <a href="/riwayat-pesan" class="nav-link sidebar-item">
+            <a href="/riwayat-pesan" class="nav-link sidebar-item {{ request()->is('riwayat-pesan*') || request()->is('review-pesan*')  ? 'active' : '' }}">
                 <i class="bi bi-clock-history me-2"></i> Riwayat Pemesanan
             </a>
         </li>

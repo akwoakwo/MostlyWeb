@@ -4,6 +4,7 @@ namespace App\Models;
 
 use App\Models\User;
 use App\Models\Produk;
+use App\Models\Review;
 use App\Models\Subpaket;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -28,5 +29,10 @@ class Pemesanan extends Model
     public function produk()
     {
         return $this->belongsTo(Produk::class, 'produk_id');
+    }
+
+        public function ulasan()
+    {
+        return $this->hasOne(Review::class, 'pemesanan_id', 'id');
     }
 }

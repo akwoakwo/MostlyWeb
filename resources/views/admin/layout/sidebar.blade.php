@@ -51,19 +51,19 @@
                     <span class="hide-menu">Katalog</span>
                 </li>
                 <li class="sidebar-item">
-                    <a class="sidebar-link {{ request()->is('/paket') ? 'active' : '' }}" href="/paket" aria-expanded="false">
+                    <a class="sidebar-link {{ request()->is('kategori*') ? 'active' : '' }}" href="/kategori"   aria-expanded="false">
+                        <span>
+                            <i class="ti ti-tag"></i>
+                        </span>
+                        <span class="hide-menu">Kategori</span>
+                    </a>
+                </li>
+                <li class="sidebar-item">
+                    <a class="sidebar-link {{ request()->is('paket*') ? 'active' : '' }}" href="/paket" aria-expanded="false">
                         <span>
                             <i class="ti ti-package"></i>
                         </span>
                         <span class="hide-menu">Paket</span>
-                    </a>
-                </li>
-                <li class="sidebar-item">
-                    <a class="sidebar-link" href="#" aria-expanded="false">
-                        <span>
-                            <i class="ti ti-tag"></i>
-                        </span>
-                        <span class="hide-menu">Sub Paket</span>
                     </a>
                 </li>
 
@@ -93,19 +93,11 @@
                     <span class="hide-menu">Profil Admin</span>
                 </li>
                 <li class="sidebar-item">
-                    <a class="sidebar-link" href="#" aria-expanded="false">
+                    <a class="sidebar-link {{ request()->is('data-admin*') ? 'active' : '' }}" href="/data-admin" aria-expanded="false">
                         <span>
                             <i class="ti ti-id-badge"></i>
                         </span>
-                        <span class="hide-menu">Register Admin</span>
-                    </a>
-                </li>
-                <li class="sidebar-item">
-                    <a class="sidebar-link" href="#" aria-expanded="false">
-                        <span>
-                            <i class="ti ti-settings"></i>
-                        </span>
-                        <span class="hide-menu">Pengaturan</span>
+                        <span class="hide-menu">Data Admin</span>
                     </a>
                 </li>
             </ul>

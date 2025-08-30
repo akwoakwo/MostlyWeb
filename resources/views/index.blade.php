@@ -304,85 +304,38 @@
     <div class="container">
         <div class="swiper mySwiper">
             <div class="swiper-wrapper">
+                @foreach ($ulasan as $item)
+                    <div class="swiper-slide">
+                        <div class="card shadow-sm p-3">
+                            <div class="mb-2 text-warning">
+                                @if ($item->rating == 5)
+                                    ⭐⭐⭐⭐⭐
+                                @elseif ($item->rating == 4)
+                                    ⭐⭐⭐⭐☆
+                                @elseif ($item->rating == 3)
+                                    ⭐⭐⭐☆☆
+                                @elseif ($item->rating == 2)
+                                    ⭐⭐☆☆☆
+                                @elseif ($item->rating == 1)
+                                    ⭐☆☆☆☆
+                                @endif
+                            </div>
+                            <p>"{{ $item->ulasan }}!"</p>
+                            <div class="d-flex align-items-center mt-3">
+                                <div class="row">
+                                    <div class="col-2">
+                                        <img src="{{ asset('assets/img/'.$item->user->gambar) }}" class="rounded-circle me-2 img-fluid" alt="Customer 1">
+                                    </div>
+                                    <div class="col-10">
+                                        <h6 class="mb-0">{{ $item->user->name }}</h6>
+                                    </div>
+                                </div>
 
-                <div class="swiper-slide">
-                    <div class="card shadow-sm p-3">
-                        <div class="mb-2 text-warning">
-                            ⭐⭐⭐⭐⭐
-                        </div>
-                        <p>"Website toko online saya jadi lebih profesional dan pelanggan semakin mudah berbelanja. Terima kasih!"</p>
-                        <div class="d-flex align-items-center mt-3">
-                            <img src="https://via.placeholder.com/50" class="rounded-circle me-2" alt="Customer 1">
-                            <h6 class="mb-0">Andi Pratama</h6>
+                                {{-- <img src="https://via.placeholder.com/50" class="rounded-circle me-2" alt="Customer 1"> --}}
+                            </div>
                         </div>
                     </div>
-                </div>
-
-                <div class="swiper-slide">
-                    <div class="card shadow-sm p-3">
-                        <div class="mb-2 text-warning">
-                            ⭐⭐⭐⭐☆
-                        </div>
-                        <p>"Pelayanan cepat, hasil desain website menarik dan sesuai dengan kebutuhan bisnis saya."</p>
-                        <div class="d-flex align-items-center mt-3">
-                            <img src="https://via.placeholder.com/50" class="rounded-circle me-2" alt="Customer 2">
-                            <h6 class="mb-0">Siti Nurhaliza</h6>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="swiper-slide">
-                    <div class="card shadow-sm p-3">
-                        <div class="mb-2 text-warning">
-                            ⭐⭐⭐⭐⭐
-                        </div>
-                        <p>"Layanan sangat memuaskan, website perusahaan kami terlihat lebih modern dan responsif."</p>
-                        <div class="d-flex align-items-center mt-3">
-                            <img src="https://via.placeholder.com/50" class="rounded-circle me-2" alt="Customer 3">
-                            <h6 class="mb-0">Budi Santoso</h6>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="swiper-slide">
-                    <div class="card shadow-sm p-3">
-                        <div class="mb-2 text-warning">
-                            ⭐⭐⭐⭐☆
-                        </div>
-                        <p>"Harga terjangkau dengan kualitas website yang sangat bagus. Rekomendasi banget!"</p>
-                        <div class="d-flex align-items-center mt-3">
-                            <img src="https://via.placeholder.com/50" class="rounded-circle me-2" alt="Customer 4">
-                            <h6 class="mb-0">Dewi Lestari</h6>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="swiper-slide">
-                    <div class="card shadow-sm p-3">
-                        <div class="mb-2 text-warning">
-                            ⭐⭐⭐⭐⭐
-                        </div>
-                        <p>"Website toko online saya jadi lebih profesional dan pelanggan semakin mudah berbelanja. Terima kasih!"</p>
-                        <div class="d-flex align-items-center mt-3">
-                            <img src="https://via.placeholder.com/50" class="rounded-circle me-2" alt="Customer 1">
-                            <h6 class="mb-0">Andi Pratama</h6>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="swiper-slide">
-                    <div class="card shadow-sm p-3">
-                        <div class="mb-2 text-warning">
-                            ⭐⭐⭐⭐⭐
-                        </div>
-                        <p>"Website toko online saya jadi lebih profesional dan pelanggan semakin mudah berbelanja. Terima kasih!"</p>
-                        <div class="d-flex align-items-center mt-3">
-                            <img src="https://via.placeholder.com/50" class="rounded-circle me-2" alt="Customer 1">
-                            <h6 class="mb-0">Andi Pratama</h6>
-                        </div>
-                    </div>
-                </div>
-
+                @endforeach
             </div>
 
             <div class="swiper-pagination mt-3"></div>
