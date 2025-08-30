@@ -177,5 +177,118 @@ class DatabaseSeeder extends Seeder
                 "Free Logo Design",
             ])
         ]]);
+
+        DB::table('kategori_produks')->insert([[
+            "nama_kategori"  => "Teknologi Digital",
+        ], [
+            "nama_kategori"  => "Otomotif",
+        ],[
+            "nama_kategori"  => "Lifestyle",
+        ],[
+            "nama_kategori"  => "Kesehatan",
+        ],[
+            "nama_kategori"  => "Pendidikan",
+        ],[
+            "nama_kategori"  => "Makanan & Minuman",
+        ],[
+            "nama_kategori"  => "Olahraga",
+        ],[
+            "nama_kategori"  => "Properti",
+        ],[
+            "nama_kategori"  => "Profil & Portofolio",
+        ],[
+            "nama_kategori"  => "Media Publikasi",
+        ],[
+            "nama_kategori"  => "Traveling",
+        ]]);
+
+        DB::table('produks')->insert([[
+            "kategori_id" => 1,
+            "nama_produk" => "Digital Store Website",
+            "gambar_produk" => "sampul_digital.png",
+            "fitur" => json_encode([
+                "Home",
+                "Katalog",
+                "Kontak",
+                "Profil",
+                "Order",
+            ])
+            ],[
+                "kategori_id" => 4,
+                "nama_produk" => "Skincare Beauty Website",
+                "gambar_produk" => "sampul_bakery.png",
+                "fitur" => json_encode([
+                    "Home",
+                    "Katalog",
+                    "Kontak",
+                    "Profil",
+                    "Order",
+            ])
+            ]]);
+
+        DB::table('logos')->insert([[
+            "nama_logo" => "Laravel",
+            "gambar_logo" => "img/logo/laravel.png"
+        ],[
+            "nama_logo" => "Wordpress",
+            "gambar_logo" => "img/logo/wordpress.png"
+        ],[
+            "nama_logo" => "HTML",
+            "gambar_logo" => "img/logo/html.png"
+        ],[
+            "nama_logo" => "CSS",
+            "gambar_logo" => "img/logo/css.png"
+        ],[
+            "nama_logo" => "JavaScript",
+            "gambar_logo" => "img/logo/javascript.png"
+        ],[
+            "nama_logo" => "PHP",
+            "gambar_logo" => "img/logo/php.png"
+        ],[
+            "nama_logo" => "Bootstrap",
+            "gambar_logo" => "img/logo/bootstrap.png"
+        ]]);
+
+        DB::table('logo_produks')->insert([[
+            "produk_id" => 1,
+            "logo_id" => 2,
+        ],[
+            "produk_id" => 2,
+            "logo_id" => 1,
+        ],[
+            "produk_id" => 2,
+            "logo_id" => 3,
+        ],[
+            "produk_id" => 2,
+            "logo_id" => 4,
+        ]]);
+
+        DB::table('preview_produks')->insert([[
+            "produk_id" => 1,
+            "gambar" => "preview-digital1.png",
+        ],[
+            "produk_id" => 1,
+            "gambar" => "preview-digital2.png",
+        ],[
+            "produk_id" => 1,
+            "gambar" => "preview-digital3.png",
+        ]]);
+
+        DB::table('faqs')->insert([[
+            "pertanyaan" => "Berapa lama proses pembuatan website?",
+            "jawaban" => "Rata-rata pembuatan website membutuhkan waktu antara 2 hingga 4 minggu, tergantung kompleksitas dan fitur yang diminta.",
+        ],[
+            "pertanyaan" => "Apakah website bisa diakses di semua perangkat?",
+            "jawaban" => "Ya, semua website yang kami buat bersifat responsif sehingga dapat diakses dengan baik melalui komputer, tablet, maupun smartphone.",
+        ],[
+            "pertanyaan" => "Apakah ada layanan maintenance setelah website selesai dibuat?",
+            "jawaban" => "Tentu, kami menyediakan layanan maintenance berkala sesuai dengan kebutuhan Anda.",
+        ],[
+            "pertanyaan" => "Apakah saya bisa melakukan kustomisasi desain website?",
+            "jawaban" => "Ya, Anda bebas melakukan kustomisasi desain sesuai preferensi, kami akan membantu mewujudkan ide Anda.",
+        ],[
+            "pertanyaan" => "Apakah biaya sudah termasuk domain dan hosting?",
+            "jawaban" => "Biaya pembuatan website sudah termasuk domain dan hosting tahun pertama, selanjutnya bisa diperpanjang sesuai kebutuhan.",
+        ]]);
     }
 }

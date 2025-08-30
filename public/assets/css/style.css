@@ -260,6 +260,13 @@ nav {
   object-fit: cover; /* biar gambar tidak gepeng */
 }
 
+.komponen-logo img {
+    width: 70px;
+    height: 70px;
+    object-fit: contain;
+    background: var(--white-color);
+}
+
 /* Kontak */
 .container-konsultasi {
     background-color: var(--secondary-color);

@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Models\Paket;
+use App\Models\Pemesanan;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
@@ -19,5 +20,10 @@ class Subpaket extends Model
     public function paket()
     {
         return $this->belongsTo(Paket::class, 'paket_id');
+    }
+
+    public function pemesanans()
+    {
+        return $this->hasMany(Pemesanan::class, 'subpaket_id');
     }
 }

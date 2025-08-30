@@ -2,7 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Logo;
 use App\Models\User;
+use App\Models\Paket;
+use App\Models\Produk;
+use App\Models\Kategori;
+use App\Models\Subpaket;
+use App\Models\Faq;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
@@ -11,6 +17,19 @@ use Illuminate\Support\Facades\Storage;
 
 class UserController extends Controller
 {
+    public function index()
+    {
+        return view('index', [
+            'title' => 'index',
+            'paket' => Paket::all(),
+            'subpaket' => Subpaket::all(),
+            'logo' => Logo::all(),
+            'kategori' => Kategori::take(6)->get(),
+            'produk' => Produk::all(),
+            'faq' => Faq::all(),
+        ]);
+    }
+
     // Register
     public function register(Request $request)
     {

@@ -26,19 +26,13 @@
 <section class="tools-section py-4 mt-0">
     <div class="slider">
         <div class="slide-track">
-            <div class="slide"><img src="{{ asset('assets/img/logo/html.png') }}" alt="HTML"></div>
-            <div class="slide"><img src="{{ asset('assets/img/logo/css.png') }}" alt="CSS"></div>
-            <div class="slide"><img src="{{ asset('assets/img/logo/javascript.png') }}" alt="JS"></div>
-            <div class="slide"><img src="{{ asset('assets/img/logo/bootstrap.png') }}" alt="Bootstrap"></div>
-            <div class="slide"><img src="{{ asset('assets/img/logo/laravel.png') }}" alt="Laravel"></div>
-            <div class="slide"><img src="{{ asset('assets/img/logo/php.png') }}" alt="PHP"></div>
+            @foreach ($logo as $item)
+                <div class="slide"><img src="{{ asset('assets/'.$item->gambar_logo) }}"></div>
+            @endforeach
 
-            <div class="slide"><img src="{{ asset('assets/img/logo/html.png') }}" alt="HTML"></div>
-            <div class="slide"><img src="{{ asset('assets/img/logo/css.png') }}" alt="CSS"></div>
-            <div class="slide"><img src="{{ asset('assets/img/logo/javascript.png') }}" alt="JS"></div>
-            <div class="slide"><img src="{{ asset('assets/img/logo/bootstrap.png') }}" alt="Bootstrap"></div>
-            <div class="slide"><img src="{{ asset('assets/img/logo/laravel.png') }}" alt="Laravel"></div>
-            <div class="slide"><img src="{{ asset('assets/img/logo/php.png') }}" alt="PHP"></div>
+            @foreach ($logo as $item)
+                <div class="slide"><img src="{{ asset('assets/'.$item->gambar_logo) }}"></div>
+            @endforeach
         </div>
     </div>
 </section>
@@ -222,7 +216,7 @@
 
         <div class="tab-content" id="pills-tabContent">
             @foreach ($paket as $item)
-                <div class="tab-pane fade show {{ $loop->first ? 'show active' : '' }}" id="pills-{{ $item->id }}" aria-labelledby="pills-{{ $item->id }}-tab">>
+                <div class="tab-pane fade show {{ $loop->first ? 'show active' : '' }}" id="pills-{{ $item->id }}" aria-labelledby="pills-{{ $item->id }}-tab">
                     <div class="row g-4">
                         @foreach ($subpaket->where('paket_id', $item->id) as $sub)
                             <div class="col-md-4">
@@ -232,7 +226,7 @@
                                         <div class="d-flex align-items-center mb-3">
                                             <h1 class="text-black m-0 mt-2">Rp {{ number_format($sub->harga, 0, ',', '.') }}</h1>
                                         </div>
-                                        <button class="btn btn-paket w-100 my-3">Pesan Sekarang</button>
+                                        <a class="btn btn-paket w-100 my-3" href="/pemesanan/{{ $sub->id }}">Pesan Sekarang</a>
 
                                         @php
                                             $benefits = is_array($sub->benefit) ? $sub->benefit : json_decode($sub->benefit, true);
@@ -279,57 +273,24 @@
         </div>
 
         <div class="d-flex justify-content-center flex-wrap mb-5 gap-3">
-            <div class="kategori-box text-center" data-kategori="hotel">Hotel</div>
-            <div class="kategori-box text-center" data-kategori="bakery">Bakery</div>
-            <div class="kategori-box text-center" data-kategori="rental">Rental</div>
-            <div class="kategori-box text-center" data-kategori="ecommerce">E-Commerce</div>
-            <div class="kategori-box text-center" data-kategori="travel">Travel</div>
-            <div class="kategori-box text-center" data-kategori="portfolio">Portfolio</div>
+            @foreach ($kategori as $item)
+                <div class="kategori-box text-center {{ $loop->first ? 'active-kategori' : '' }}" data-kategori="{{ $item->id }}">{{ $item->nama_kategori }}</div>
+            @endforeach
             <div class="kategori-box text-center bg-dark text-white" onclick="window.location.href='/produk'">Selengkapnya</div>
         </div>
 
         <div id="produk-container" class="row g-4 justify-content-center">
-            <div class="col-md-6 mb-3" data-kategori="hotel">
-                <div class="card shadow-sm">
-                    <img src="{{ asset('assets/img/sampul_pkpri.png') }}" class="card-img-top" alt="Website Bakery">
-                    <div class="card-body">
-                        <h5 class="card-title fw-semibold">Website Hotel</h5>
-                        <a href="#" class="btn btn-produk btn-sm">Preview</a>
+            @foreach ($produk as $item)
+                <div class="col-md-6 mb-3" data-kategori="{{ $item->kategori_id }}">
+                    <div class="card shadow-sm">
+                        <img src="{{ asset('assets/img/' . $item->gambar_produk) }}" class="card-img-top" alt="{{ $item->nama_produk }}">
+                        <div class="card-body">
+                            <h5 class="card-title fw-semibold">{{ $item->nama_produk }}</h5>
+                            <a href="/preview/{{ $item->id }}" class="btn btn-produk btn-sm">Preview</a>
+                        </div>
                     </div>
                 </div>
-            </div>
-
-            <div class="col-md-6" data-kategori="hotel">
-                <div class="card shadow-sm">
-                    <img src="{{ asset('assets/img/sampul_pkpri.png') }}" class="card-img-top" alt="Website Bakery">
-                    <div class="card-body">
-                        <h5 class="card-title fw-semibold">Website Hotel</h5>
-                        <a href="#" class="btn btn-produk btn-sm">Preview</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div id="produk-container" class="row g-4 justify-content-center">
-            <div class="col-md-6" data-kategori="bakery">
-                <div class="card shadow-sm">
-                    <img src="{{ asset('assets/img/sampul_bakery.png') }}" class="card-img-top" alt="Website Bakery">
-                    <div class="card-body">
-                        <h5 class="card-title fw-semibold">Website Bakery</h5>
-                        <a href="/preview" class="btn btn-produk btn-sm">Preview</a>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-md-6" data-kategori="bakery">
-                <div class="card shadow-sm">
-                    <img src="{{ asset('assets/img/sampul_bakery.png') }}" class="card-img-top" alt="Website Bakery">
-                    <div class="card-body">
-                        <h5 class="card-title fw-semibold">Website Bakery</h5>
-                        <a href="#" class="btn btn-produk btn-sm">Preview</a>
-                    </div>
-                </div>
-            </div>
+            @endforeach
         </div>
     </div>
 </section>
@@ -437,70 +398,20 @@
         </div>
 
         <div class="accordion" id="faqAccordion">
-            <div class="accordion-item mb-3 border-0 shadow-sm rounded">
-                <h2 class="accordion-header" id="headingOne">
-                    <button class="accordion-button collapsed d-flex align-items-center" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
-                        <span class="me-2 fw-bold">Berapa lama proses pembuatan website?
-                    </button>
-                </h2>
-                <div id="collapseOne" class="accordion-collapse collapse" aria-labelledby="headingOne" data-bs-parent="#faqAccordion">
-                    <div class="accordion-body">
-                        Rata-rata pembuatan website membutuhkan waktu antara 2 hingga 4 minggu, tergantung kompleksitas dan fitur yang diminta.
+            @foreach ($faq as $index => $item)
+                <div class="accordion-item mb-3 border-0 shadow-sm rounded">
+                    <h2 class="accordion-header" id="headingOne">
+                        <button class="accordion-button collapsed d-flex align-items-center" type="button" data-bs-toggle="collapse" data-bs-target="#collapse{{ $index }}" aria-expanded="false" aria-controls="collapse{{ $index }}">
+                            <span class="me-2 fw-bold">{{ $item->pertanyaan }}
+                        </button>
+                    </h2>
+                    <div id="collapse{{ $index }}" class="accordion-collapse collapse" aria-labelledby="heading{{ $index }}" data-bs-parent="#faqAccordion">
+                        <div class="accordion-body">
+                            {{ $item->jawaban }}
+                        </div>
                     </div>
                 </div>
-            </div>
-
-            <div class="accordion-item mb-3 border-0 shadow-sm rounded">
-                <h2 class="accordion-header" id="headingTwo">
-                    <button class="accordion-button collapsed d-flex align-items-center" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-                        <span class="me-2 fw-bold">Apakah website bisa diakses di semua perangkat?
-                    </button>
-                </h2>
-                <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#faqAccordion">
-                    <div class="accordion-body">
-                        Ya, semua website yang kami buat bersifat responsif sehingga dapat diakses dengan baik melalui komputer, tablet, maupun smartphone.
-                    </div>
-                </div>
-            </div>
-
-            <div class="accordion-item mb-3 border-0 shadow-sm rounded">
-                <h2 class="accordion-header" id="headingThree">
-                    <button class="accordion-button collapsed d-flex align-items-center" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-                        <span class="me-2 fw-bold">Apakah ada layanan maintenance setelah website selesai dibuat?
-                    </button>
-                </h2>
-                <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#faqAccordion">
-                    <div class="accordion-body">
-                        Tentu, kami menyediakan layanan maintenance berkala sesuai dengan kebutuhan Anda.
-                    </div>
-                </div>
-            </div>
-
-            <div class="accordion-item mb-3 border-0 shadow-sm rounded">
-                <h2 class="accordion-header" id="headingFour">
-                    <button class="accordion-button collapsed d-flex align-items-center" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
-                        <span class="me-2 fw-bold">Apakah saya bisa melakukan kustomisasi desain website?
-                    </button>
-                </h2>
-                <div id="collapseFour" class="accordion-collapse collapse" aria-labelledby="headingFour" data-bs-parent="#faqAccordion">
-                    <div class="accordion-body">
-                        Ya, Anda bebas melakukan kustomisasi desain sesuai preferensi, kami akan membantu mewujudkan ide Anda.
-                    </div>
-                </div>
-            </div>
-
-            <div class="accordion-item mb-3 border-0 shadow-sm rounded">
-                <h2 class="accordion-header" id="headingFive">
-                    <button class="accordion-button collapsed d-flex align-items-center" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFive" aria-expanded="false" aria-controls="collapseFive">
-                        <span class="me-2 fw-bold">Apakah biaya sudah termasuk domain dan hosting?
-                    </button>
-                </h2>
-                <div id="collapseFive" class="accordion-collapse collapse" aria-labelledby="headingFive" data-bs-parent="#faqAccordion">
-                    <div class="accordion-body">
-                        Biaya pembuatan website sudah termasuk domain dan hosting tahun pertama, selanjutnya bisa diperpanjang sesuai kebutuhan.
-                    </div>
-                </div>
-            </div>
+            @endforeach
         </div>
 
         <div class="container-konsultasi mt-5 p-5 text-white rounded shadow text-center">

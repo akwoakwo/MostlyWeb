@@ -3,44 +3,36 @@
 
 @section('content')
 <div class="container my-5">
-
     <div class="swiper myPreviewSwiper">
         <div class="swiper-wrapper">
-            <div class="swiper-slide">
-                <img src="{{ asset('assets/img/preview1.png') }}" class="img-fluid" style="height:500px; width:100%; object-fit:cover;">
-            </div>
-            <div class="swiper-slide">
-                <img src="{{ asset('assets/img/preview2.png') }}" class="img-fluid" style="height:500px; width:100%; object-fit:cover;">
-            </div>
-            <div class="swiper-slide">
-                <img src="{{ asset('assets/img/preview3.png') }}" class="img-fluid" style="height:500px; width:100%; object-fit:cover;">
-            </div>
+            @foreach($produk->previews as $index => $preview)
+                <div class="swiper-slide">
+                    <img src="{{ asset('assets/img/' . $preview->gambar) }}" class="img-fluid" style="height:500px; width:100%; object-fit:cover;">
+                </div>
+            @endforeach
         </div>
 
         <div class="swiper-button-next"></div>
         <div class="swiper-button-prev"></div>
-
         <div class="swiper-pagination"></div>
     </div>
 
-    <h2 class="fw-bold">Website Bakery</h2>
-
-    <div class="mt-3">
-        <h5>Komponen yang digunakan:</h5>
-        <ul class="list-group list-group-flush">
-            <li class="list-group-item">Bahasa Pemrograman: PHP</li>
-            <li class="list-group-item">Framework: Laravel</li>
-            <li class="list-group-item">Frontend: Bootstrap 5</li>
-            <li class="list-group-item">Database: MySQL</li>
-        </ul>
+    <h2 class="fw-bold mt-3">{{ $produk->nama_produk }}</h2>
+    <div class="mt-5">
+        <h4 class="fw-bold text-dark mb-3">Komponen yang Digunakan</h4>
+        <div class="d-flex flex-wrap gap-3">
+            @foreach($produk->logos as $logo)
+                <div class="komponen-logo text-center">
+                    <img src="{{ asset('assets/' . $logo->gambar_logo) }}" alt="logo" class="img-thumbnail rounded p-2">
+                    <small class="d-block mt-2 text-muted">{{ $logo->nama_logo }}</small>
+                </div>
+            @endforeach
+        </div>
     </div>
-
     <div class="text-center mt-5">
         <a href="/" class="btn btn-secondary px-4">
             Kembali
         </a>
     </div>
-
 </div>
-
 @endsection

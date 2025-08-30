@@ -53,14 +53,28 @@
             const kategoriBoxes = document.querySelectorAll(".kategori-box");
             const cards = document.querySelectorAll("#produk-container .col-md-6");
 
+            let activeKategoriBox = document.querySelector(".kategori-box.active-kategori") || kategoriBoxes[0];
+            let activeKategori = activeKategoriBox ? activeKategoriBox.getAttribute("data-kategori") : null;
+
+            if (activeKategori) {
+                cards.forEach(card => {
+                    if (card.getAttribute("data-kategori") === activeKategori) {
+                        card.style.display = "block";
+                    } else {
+                        card.style.display = "none";
+                    }
+                });
+            }
+
             kategoriBoxes.forEach(box => {
                 box.addEventListener("click", function() {
                     let kategori = this.getAttribute("data-kategori");
-
                     if (!kategori) return;
+
                     kategoriBoxes.forEach(b => b.classList.remove("active-kategori"));
                     this.classList.add("active-kategori");
 
+                    // Filter produk
                     cards.forEach(card => {
                         if (card.getAttribute("data-kategori") === kategori) {
                             card.style.display = "block";
