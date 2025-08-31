@@ -50,7 +50,7 @@
                         <div class="d-flex align-items-center justify-content-between m-3">
                             {{-- tambah data --}}
                             <b> {{ $data->count() }} ADMIN </b>
-                            <button type="button" class="btn btn-primary shadow-none" data-bs-toggle="modal" data-bs-target="#modal-baru">Tambah Admin Baru</button>
+                            <a href="{{ route('data-admin.create') }}" class="btn btn-primary shadow-none"> Tambah Admin Baru </a>
                         </div>
 
                         <div class="table-responsive">
@@ -80,9 +80,29 @@
                                 </td>
                                 <td>
                                     @if ($item->id === auth()->user()->id)
-                                        <a href="" class="btn btn-primary btn-sm"> <i class="ti ti-pencil"></i> </a>
+                                        <a href="{{ route('data-admin.edit',$item->id) }}" class="btn btn-primary btn-sm"> <i class="ti ti-pencil"></i> </a>
                                     @else
-                                        <button type="button" class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#deleteModal"> <i class="ti ti-trash"></i> </button>
+                                        <button type="button" class="btn btn-sm btn-danger shadow-none" data-bs-toggle="modal" data-bs-target="#hapus-modal{{ $item->id }}"><i class="ti ti-trash"></i></button>
+                                        <div class="modal fade" id="hapus-modal{{ $item->id }}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                            <div class="modal-dialog">
+                                                <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title">Konfirmasi Hapus Data</h5>
+                                                </div>
+                                                <div class="modal-body text-center">
+                                                    <p style="color: black">Apakah anda yakin untuk menghapus data admin dengan nama : <b>{{ $item->name }}</b> ? </p>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-secondary shadow-none" data-bs-dismiss="modal">Tidak</button>
+                                                    <form action="{{ route('data-admin.destroy',$item->id) }}" method="POST" style="display: inline;">
+                                                        @method('delete')
+                                                        @csrf
+                                                        <input type="submit" value="Hapus" class="btn btn-danger shadow-none">
+                                                    </form> 
+                                                </div>
+                                                </div>
+                                            </div>
+                                        </div>
                                     @endif
                                 </td>
                             </tr>

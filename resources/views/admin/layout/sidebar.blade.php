@@ -59,14 +59,6 @@
                     </a>
                 </li>
                 <li class="sidebar-item">
-                    <a class="sidebar-link {{ request()->is('kategori*') ? 'active' : '' }}" href="/kategori"   aria-expanded="false">
-                        <span>
-                            <i class="ti ti-tag"></i>
-                        </span>
-                        <span class="hide-menu">Kategori</span>
-                    </a>
-                </li>
-                <li class="sidebar-item">
                     <a class="sidebar-link {{ request()->is('paket*') ? 'active' : '' }}" href="/paket" aria-expanded="false">
                         <span>
                             <i class="ti ti-package"></i>
@@ -80,7 +72,7 @@
                     <span class="hide-menu">Template</span>
                 </li>
                 <li class="sidebar-item">
-                    <a class="sidebar-link" href="#" aria-expanded="false">
+                    <a class="sidebar-link {{ request()->is('kategori*') ? 'active' : '' }}" href="/kategori" aria-expanded="false">
                         <span>
                             <i class="ti ti-folder"></i>
                         </span>

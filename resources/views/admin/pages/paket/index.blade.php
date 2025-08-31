@@ -64,7 +64,7 @@
                                             <div class="modal-body">
                                                 <div class="mb-2">
                                                     <label>Nama Paket</label>
-                                                    <input type="text" name="nama_paket" class="form-control @error('nama_paket') is-invalid @enderror shadow-none" value="{{ old('nama_paket') >
+                                                    <input type="text" name="nama_paket" class="form-control @error('nama_paket') is-invalid @enderror shadow-none" value="{{ old('nama_paket') }}" >
                                                     @error('nama_paket') 
                                                         <div class="invalid-feedback">
                                                             {{ $message }}
