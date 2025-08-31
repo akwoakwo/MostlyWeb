@@ -38,18 +38,4 @@ class PemesananController extends Controller
             'data' => Pemesanan::findOrFail($id),
         ]);
     }
-
-    public function store(Request $request) {
-        $data = new Review();
-        $data->pemesanan_id = $request->pemesanan_id;
-        $data->user_id = auth()->user()->id;
-        $data->rating = $request->rating;
-        $data->ulasan = $request->ulasan;
-
-        if ($data->save()) {
-            return redirect('riwayat-pesan')->with('success', 'Terima kasih atas ulasan anda!');
-        } else {
-            return redirect('riwayat-pesan')->with('error', 'Yahh! Anda belum bisa memberikan ulasan.');
-        }
-    } 
 }

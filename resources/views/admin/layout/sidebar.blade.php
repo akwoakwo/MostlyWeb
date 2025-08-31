@@ -51,6 +51,14 @@
                     <span class="hide-menu">Katalog</span>
                 </li>
                 <li class="sidebar-item">
+                    <a class="sidebar-link {{ request()->is('logo*') ? 'active' : '' }}" href="/logo"   aria-expanded="false">
+                        <span>
+                            <i class="ti ti-chart-donut-3"></i>
+                        </span>
+                        <span class="hide-menu">Logo</span>
+                    </a>
+                </li>
+                <li class="sidebar-item">
                     <a class="sidebar-link {{ request()->is('kategori*') ? 'active' : '' }}" href="/kategori"   aria-expanded="false">
                         <span>
                             <i class="ti ti-tag"></i>
@@ -98,6 +106,27 @@
                             <i class="ti ti-id-badge"></i>
                         </span>
                         <span class="hide-menu">Data Admin</span>
+                    </a>
+                </li>
+
+                <li class="nav-small-cap">
+                    <i class="ti ti-dots nav-small-cap-icon fs-4"></i>
+                    <span class="hide-menu">Lainnya</span>
+                </li>
+                <li class="sidebar-item">
+                    <a class="sidebar-link {{ request()->is('ulasan*') ? 'active' : '' }}" href="/ulasan" aria-expanded="false">
+                        <span>
+                            <i class="ti ti-message-dots"></i>
+                        </span>
+                        <span class="hide-menu">Ulasan</span>
+                    </a>
+                </li>
+                <li class="sidebar-item">
+                    <a class="sidebar-link {{ request()->is('faq*') ? 'active' : '' }}" href="/faq" aria-expanded="false">
+                        <span>
+                            <i class="ti ti-help"></i>
+                        </span>
+                        <span class="hide-menu">FAQ</span>
                     </a>
                 </li>
             </ul>
