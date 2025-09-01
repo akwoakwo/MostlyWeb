@@ -1,5 +1,5 @@
 @extends('admin.setup.app')
-@section('title','Paket - Admin MostlyWeb')
+@section('title','Kategori - Admin MostlyWeb')
 
 @section('content')
 
@@ -64,23 +64,23 @@
                                                 <div class="mb-2">
                                                     <label>Nama Kategori</label>
                                                     <input type="text" name="nama_kategori" class="form-control @error('nama_kategori') is-invalid @enderror shadow-none" value="{{ old('nama_kategori') }}">
-                                                    @error('nama_kategori') 
+                                                    @error('nama_kategori')
                                                         <div class="invalid-feedback">
                                                             {{ $message }}
-                                                        </div> 
+                                                        </div>
                                                     @enderror
                                                 </div>
                                             </div>
                                             <div class="modal-footer">
-                                                <button type="button" class="btn btn-secondary shadow-none" data-bs-dismiss="modal">Tidak</button> 
-                                                <button type="submit" class="btn btn-success shadow-none">Kirim</button> 
+                                                <button type="button" class="btn btn-secondary shadow-none" data-bs-dismiss="modal">Tidak</button>
+                                                <button type="submit" class="btn btn-success shadow-none">Kirim</button>
                                             </div>
                                         </form>
                                     </div>
                                 </div>
                             </div>
                         </div>
-        
+
                         <div class="row">
                         @if (count($data))
                             @foreach ($data as $item)
@@ -106,16 +106,16 @@
                                                                     <div class="mb-2">
                                                                         <label>Nama Kategori</label>
                                                                         <input type="text" name="nama_kategori" class="form-control @error('nama_kategori') is-invalid @enderror shadow-none" value="{{ $item->nama_kategori }}">
-                                                                        @error('nama_kategori') 
+                                                                        @error('nama_kategori')
                                                                             <div class="invalid-feedback">
                                                                                 {{ $message }}
-                                                                            </div> 
+                                                                            </div>
                                                                         @enderror
                                                                     </div>
                                                                 </div>
                                                                 <div class="modal-footer">
-                                                                    <button type="button" class="btn btn-secondary shadow-none" data-bs-dismiss="modal">Tidak</button> 
-                                                                    <button type="submit" class="btn btn-success shadow-none">Update</button> 
+                                                                    <button type="button" class="btn btn-secondary shadow-none" data-bs-dismiss="modal">Tidak</button>
+                                                                    <button type="submit" class="btn btn-success shadow-none">Update</button>
                                                                 </div>
                                                             </form>
                                                         </div>
@@ -138,7 +138,7 @@
                                                                 @method('delete')
                                                                 @csrf
                                                                 <input type="submit" value="Hapus" class="btn btn-danger shadow-none">
-                                                            </form> 
+                                                            </form>
                                                         </div>
                                                         </div>
                                                     </div>

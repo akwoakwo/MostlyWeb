@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('produk_id')->constrained('produks');
             $table->string('gambar');
+            $table->timestamps();
         });
     }
 

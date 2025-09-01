@@ -21,7 +21,8 @@ class PaketController extends Controller
         ]);
     }
 
-    public function store(Request $request) {
+    public function store(Request $request)
+    {
         $request->validate([
             'nama_paket' => 'required|unique:pakets,nama_paket',
         ]);
@@ -36,17 +37,8 @@ class PaketController extends Controller
         }
     }
 
-    public function show($id)
+    public function update(Request $request, $id)
     {
-        return view('admin.pages.paket.show', [
-            'title' => 'index',
-            'paket' => Paket::findOrFail($id),
-            'data' => Subpaket::where('paket_id',$id)->get(),
-
-        ]);
-    }
-
-    public function update(Request $request, $id) {
         $request->validate([
             'nama_paket' => 'required|unique:pakets,nama_paket',
         ]);
@@ -61,12 +53,64 @@ class PaketController extends Controller
         }
     }
 
-    public function destroy($id) {
+    public function destroy($id)
+    {
         $data = Paket::findOrFail($id);
         if ($data->delete()) {
             return redirect()->back()->with('success', 'Paket berhasil dihapus!');
         } else {
             return redirect()->back()->with('error', 'Paket gagal dihapus!');
         }
+    }
+
+    public function show($id)
+    {
+        return view('admin.pages.paket.show', [
+            'title' => 'index',
+            'paket' => Paket::findOrFail($id),
+            'data' => Subpaket::where('paket_id', $id)->get(),
+        ]);
+    }
+
+    public function substore(Request $request)
+    {
+        $request->validate([
+            'paket_id' => 'required|exists:pakets,id',
+            'nama_subpaket' => 'required|string|max:255',
+            'harga' => 'required|numeric',
+            'benefit' => 'required|array',
+            'benefit.*' => 'string'
+        ]);
+
+        Subpaket::create([
+            'paket_id' => $request->paket_id,
+            'nama_subpaket' => $request->nama_subpaket,
+            'harga' => $request->harga,
+            'benefit' => $request->benefit
+        ]);
+
+        return redirect()->back()->with('success', 'Sub Paket berhasil ditambahkan');
+    }
+
+    public function subupdate(Request $request, $id)
+    {
+        $request->validate([
+            'paket_id' => 'required|exists:pakets,id',
+            'nama_subpaket' => 'required|string|max:255',
+            'harga' => 'required|numeric',
+            'benefit' => 'required|array',
+            'benefit.*' => 'string'
+        ]);
+
+        $subpaket = Subpaket::findOrFail($id);
+
+        $subpaket->update([
+            'paket_id' => $request->paket_id,
+            'nama_subpaket' => $request->nama_subpaket,
+            'harga' => $request->harga,
+            'benefit' => $request->benefit
+        ]);
+
+        return redirect()->back()->with('success', 'Sub Paket berhasil diupdate');
     }
 }

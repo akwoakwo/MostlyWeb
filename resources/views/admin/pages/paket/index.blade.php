@@ -49,7 +49,7 @@
                     <div class="card-body">
                         <div class="d-flex align-items-center justify-content-between m-3">
                             <b> {{ $paket->count() }} PAKET </b>
-                            
+
                             {{-- tambah data --}}
                             <button type="button" class="btn btn-primary shadow-none" data-bs-toggle="modal" data-bs-target="#modal-baru">Tambah Paket Baru</button>
                             <div class="modal fade" id="modal-baru" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -65,23 +65,23 @@
                                                 <div class="mb-2">
                                                     <label>Nama Paket</label>
                                                     <input type="text" name="nama_paket" class="form-control @error('nama_paket') is-invalid @enderror shadow-none" value="{{ old('nama_paket') }}" >
-                                                    @error('nama_paket') 
+                                                    @error('nama_paket')
                                                         <div class="invalid-feedback">
                                                             {{ $message }}
-                                                        </div> 
+                                                        </div>
                                                     @enderror
                                                 </div>
                                             </div>
                                             <div class="modal-footer">
-                                                <button type="button" class="btn btn-secondary shadow-none" data-bs-dismiss="modal">Tidak</button> 
-                                                <button type="submit" class="btn btn-success shadow-none">Kirim</button> 
+                                                <button type="button" class="btn btn-secondary shadow-none" data-bs-dismiss="modal">Tidak</button>
+                                                <button type="submit" class="btn btn-success shadow-none">Kirim</button>
                                             </div>
                                         </form>
                                     </div>
                                 </div>
                             </div>
                         </div>
-        
+
                         <div class="row">
                         @if (count($paket))
                             @foreach ($paket as $item)
@@ -107,21 +107,22 @@
                                                                     <div class="mb-2">
                                                                         <label>Nama Paket</label>
                                                                         <input type="text" name="nama_paket" class="form-control @error('nama_paket') is-invalid @enderror shadow-none" value="{{ $item->nama_paket }}">
-                                                                        @error('nama_paket') 
+                                                                        @error('nama_paket')
                                                                             <div class="invalid-feedback">
                                                                                 {{ $message }}
-                                                                            </div> 
+                                                                            </div>
                                                                         @enderror
                                                                     </div>
                                                                 </div>
                                                                 <div class="modal-footer">
-                                                                    <button type="button" class="btn btn-secondary shadow-none" data-bs-dismiss="modal">Tidak</button> 
-                                                                    <button type="submit" class="btn btn-success shadow-none">Update</button> 
+                                                                    <button type="button" class="btn btn-secondary shadow-none" data-bs-dismiss="modal">Tidak</button>
+                                                                    <button type="submit" class="btn btn-success shadow-none">Update</button>
                                                                 </div>
                                                             </form>
                                                         </div>
                                                     </div>
                                                 </div>
+
                                                 {{-- hapus data --}}
                                                 <button type="button" class="btn btn-danger shadow-none" data-bs-toggle="modal" data-bs-target="#hapus-modal{{ $item->id }}"><i class="ti ti-trash"></i></button>
                                                 <div class="modal fade" id="hapus-modal{{ $item->id }}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -139,11 +140,12 @@
                                                                 @method('delete')
                                                                 @csrf
                                                                 <input type="submit" value="Hapus" class="btn btn-danger shadow-none">
-                                                            </form> 
+                                                            </form>
                                                         </div>
                                                         </div>
                                                     </div>
                                                 </div>
+                                                
                                                 {{-- detail data --}}
                                                 <a href="{{ route('paket.show',$item->id) }}" class="btn btn-info"><i class="ti ti-plus"></i></a>
                                             </div>

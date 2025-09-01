@@ -76,15 +76,15 @@
                         <span>
                             <i class="ti ti-folder"></i>
                         </span>
-                        <span class="hide-mwnu">Jenis Website</span>
+                        <span class="hide-mwnu">Kategori Website</span>
                     </a>
                 </li>
                 <li class="sidebar-item">
-                    <a class="sidebar-link" href="#" aria-expanded="false">
+                    <a class="sidebar-link {{ request()->is('produk*') ? 'active' : '' }}" href="/produk" aria-expanded="false">
                         <span>
                             <i class="ti ti-palette"></i>
                         </span>
-                        <span class="hide-menu">Desain Website</span>
+                        <span class="hide-menu">Produk Website</span>
                     </a>
                 </li>
 
