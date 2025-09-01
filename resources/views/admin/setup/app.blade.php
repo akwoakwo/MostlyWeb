@@ -30,12 +30,61 @@
     <script src="{{ asset('modernize/src/libs/simplebar/dist/simplebar.js') }}"></script>
     <script src="{{ asset('modernize/src/js/dashboard.js') }}"></script>
 
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            let maxFitur = 10;
+            let wrapper = document.getElementById("fitur-wrapper");
+            let addBtn = document.getElementById("add-fitur");
+
+            addBtn.addEventListener("click", function() {
+                let count = wrapper.querySelectorAll(".input-group").length;
+                if (count < maxFitur) {
+                    let div = document.createElement("div");
+                    div.className = "input-group mb-2";
+                    div.innerHTML = `
+                    <input type="text" name="fitur[]" class="form-control" placeholder="Fitur ${count + 1}">
+                    <button type="button" class="btn btn-danger remove-fitur">Hapus</button>
+                `;
+                    wrapper.appendChild(div);
+                } else {
+                    alert("Maksimal 10 fitur saja!");
+                }
+            });
+        });
+    </script>
+
+    <script>
+        document.addEventListener("click", function(e) {
+            if (e.target.classList.contains("add-upfitur")) {
+                let paketId = e.target.getAttribute("data-id");
+                let wrapper = document.getElementById("fitur-wrapper-" + paketId);
+
+                let count = wrapper.querySelectorAll(".input-group").length;
+                if (count < 10) {
+                    let div = document.createElement("div");
+                    div.className = "input-group mb-2";
+                    div.innerHTML = `
+                <input type="text" name="fitur[]" class="form-control" placeholder="fitur">
+                <button type="button" class="btn btn-danger remove-fitur">Hapus</button>
+            `;
+                    wrapper.appendChild(div);
+                } else {
+                    alert("Maksimal 10 fitur saja!");
+                }
+            }
+
+            if (e.target.classList.contains("remove-fitur")) {
+                e.target.closest(".input-group").remove();
+            }
+        });
+    </script>
+
     <script>
         document.addEventListener("DOMContentLoaded", function() {
             let maxBenefit = 10;
             let wrapper = document.getElementById("benefit-wrapper");
             let addBtn = document.getElementById("add-benefit");
-            let upBtn = document.getElementById("add-upbenefit");
 
             // Tambah benefit baru
             addBtn.addEventListener("click", function() {
@@ -52,27 +101,45 @@
                     alert("Maksimal 10 benefit saja!");
                 }
             });
+        });
+    </script>
 
-            upBtn.addEventListener("click", function() {
+    <script>
+        document.addEventListener("click", function(e) {
+            if (e.target.classList.contains("add-upbenefit")) {
+                let paketId = e.target.getAttribute("data-id");
+                let wrapper = document.getElementById("benefit-wrapper-" + paketId);
+
                 let count = wrapper.querySelectorAll(".input-group").length;
-                if (count < maxBenefit) {
+                if (count < 10) {
                     let div = document.createElement("div");
                     div.className = "input-group mb-2";
                     div.innerHTML = `
-                    <input type="text" name="benefit[]" class="form-control" placeholder="Benefit ${count + 1}">
-                    <button type="button" class="btn btn-danger remove-benefit">Hapus</button>
-                `;
+                <input type="text" name="benefit[]" class="form-control" placeholder="Benefit">
+                <button type="button" class="btn btn-danger remove-benefit">Hapus</button>
+            `;
                     wrapper.appendChild(div);
                 } else {
                     alert("Maksimal 10 benefit saja!");
                 }
-            });
+            }
 
-            document.addEventListener("click", function(e) {
-                if (e.target.classList.contains("remove-benefit")) {
-                    e.target.closest(".input-group").remove();
-                }
-            });
+            // hapus input benefit
+            if (e.target.classList.contains("remove-benefit")) {
+                e.target.closest(".input-group").remove();
+            }
+        });
+    </script>
+
+    <script>
+        document.getElementById('logoBaruBtn').addEventListener('click', function() {
+            document.getElementById('formLogoBaru').style.display = 'block';
+            document.getElementById('formLogoDatabase').style.display = 'none';
+        });
+
+        document.getElementById('logoDatabaseBtn').addEventListener('click', function() {
+            document.getElementById('formLogoBaru').style.display = 'none';
+            document.getElementById('formLogoDatabase').style.display = 'block';
         });
     </script>
 </body>

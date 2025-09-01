@@ -37,14 +37,18 @@ class ProdukController extends Controller
         return view('admin.pages.produk.index', [
             'title' => 'index',
             'data' => Produk::orderBy('nama_produk')->get(),
+            'kategori' => Kategori::all()
         ]);
     }
 
     public function store(Request $request)
     {
         $request->validate([
+            'kategori_id' => 'required|exists:kategori_produks,id',
             'nama_produk' => 'required|unique:produks,nama_produk',
             'gambar_produk' => 'required',
+            'fitur' => 'required|array',
+            'fitur.*' => 'string',
         ]);
 
         $requestImg = $request->file('gambar_produk');
@@ -52,8 +56,10 @@ class ProdukController extends Controller
         $requestImg->move(public_path('assets/img/'), $imageName);
 
         $data = new Produk();
+        $data->kategori_id = $request->kategori_id;
         $data->nama_produk = $request->nama_produk;
         $data->gambar_produk = $imageName;
+        $data->fitur = $request->fitur;
 
         if ($data->save()) {
             return redirect()->back()->with('success', 'Produk baru berhasil ditambahkan!');
@@ -65,7 +71,10 @@ class ProdukController extends Controller
     public function update(Request $request, $id)
     {
         $request->validate([
+            'kategori_id' => 'required|exists:kategori_produks,id',
             'nama_produk' => 'required',
+            'fitur' => 'required|array',
+            'fitur.*' => 'string'
         ]);
 
         $data = Produk::findOrFail($id);
@@ -81,8 +90,10 @@ class ProdukController extends Controller
             $imageName = $data->gambar_produk;
         }
 
+        $data->kategori_id = $request->kategori_id;
         $data->nama_produk = $request->nama_produk;
         $data->gambar_produk = $imageName;
+        $data->fitur = $request->fitur;
 
         if ($data->save()) {
             return redirect()->back()->with('success', 'Produk berhasil diupdate!');
@@ -116,38 +127,71 @@ class ProdukController extends Controller
         return view('admin.pages.produk.show', compact('produk'));
     }
 
-    public function prestore(Request $request)
+    public function prestore(Request $request, $id)
     {
-        $request->validate([
-            'produk_id' => 'required|exists:produks,id',
-            'gambar' => 'required|image|mimes:jpg,jpeg,png,webp|max:2048'
-        ]);
+        $produk = Produk::findOrFail($id);
 
-        $file = $request->file('gambar');
-        $filename = time() . '_' . $file->getClientOriginalName();
-        $file->move(public_path('assets/img'), $filename);
-        Preview::create([
-            'produk_id' => $request->produk_id,
-            'gambar' => $filename,
-        ]);
+        if ($request->hasFile('gambar')) {
+            $request->validate([
+                'gambar' => 'required|image|mimes:jpg,jpeg,png|max:2048',
+            ]);
 
-        return back()->with('success', 'Preview berhasil ditambahkan');
+            $file = $request->file('gambar');
+            $filename = time() . '_' . $file->getClientOriginalName();
+            $file->move(public_path('assets/img'), $filename);
+
+            Preview::create([
+                'produk_id' => $produk->id,
+                'gambar' => $filename,
+            ]);
+
+            return back()->with('success', 'Preview produk berhasil ditambahkan!');
+        }
+
+        if ($request->hasFile('logo_baru')) {
+            $request->validate([
+                'logo_baru' => 'required|image|mimes:jpg,jpeg,png|max:2048',
+                'nama_logo' => 'required|string|max:100',
+            ]);
+
+            $file = $request->file('logo_baru');
+            $filename = time() . '_' . $file->getClientOriginalName();
+            $file->move(public_path('assets/img/logo'), $filename);
+
+            // Simpan ke tabel logos
+            $logo = Logo::create([
+                'nama_logo' => $request->nama_logo,
+                'gambar_logo' => $filename,
+            ]);
+
+            // Hubungkan ke produk
+            $produk->logos()->attach($logo->id);
+
+            return back()->with('success', 'Logo baru berhasil ditambahkan ke produk!');
+        }
+
+        // Jika memilih logo yang sudah ada
+        if ($request->filled('logo_id')) {
+            $produk->logos()->attach($request->logo_id);
+            return back()->with('success', 'Logo berhasil ditambahkan dari database!');
+        }
+
+        return back()->with('error', 'Tidak ada data yang ditambahkan!');
     }
 
+    // Hapus preview produk
     public function predestroy($id)
     {
         $preview = Preview::findOrFail($id);
 
-        // Buat path lengkap file
+        // Hapus file fisik
         $path = public_path('assets/img/' . $preview->gambar);
-
         if (file_exists($path)) {
             unlink($path);
         }
 
-        // hapus dari database
         $preview->delete();
 
-        return back()->with('success', 'Preview berhasil dihapus');
+        return back()->with('success', 'Preview produk berhasil dihapus!');
     }
 }

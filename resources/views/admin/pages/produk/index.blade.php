@@ -48,8 +48,9 @@
             <div class="card">
                 <div class="card-body">
                     <div class="d-flex align-items-center justify-content-between m-3">
-                        {{-- tambah data --}}
                         <b> {{ $data->count() }} PRODUK WEBSITE </b>
+
+                        {{-- tambah data --}}
                         <button type="button" class="btn btn-primary shadow-none" data-bs-toggle="modal" data-bs-target="#modal-baru">Tambah Produk Website Baru</button>
                         <div class="modal fade" id="modal-baru" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                             <div class="modal-dialog">
@@ -61,6 +62,21 @@
                                     <form action="{{ route('produk.store') }}" method="post">
                                         @csrf
                                         <div class="modal-body">
+                                            <div class="mb-2">
+                                                <label>Kategori Produk</label>
+                                                <select name="kategori_id" class="form-control @error('kategori_id') is-invalid @enderror shadow-none">
+                                                    <option value="">-- Pilih Kategori --</option>
+                                                    @foreach($kategori as $k)
+                                                    <option value="{{ $k->id }}">{{ $k->nama_kategori }}</option>
+                                                    @endforeach
+                                                </select>
+                                                @error('kategori_id')
+                                                <div class="invalid-feedback">
+                                                    {{ $message }}
+                                                </div>
+                                                @enderror
+                                            </div>
+
                                             <div class="mb-2">
                                                 <label>Nama Produk Website</label>
                                                 <input type="text" name="nama_produk" class="form-control @error('nama_produk') is-invalid @enderror shadow-none" value="{{ old('nama_produk') }}">
@@ -75,9 +91,22 @@
                                                 <label>Gambar Produk</label>
                                                 <input type="file" name="gambar_produk" class="form-control @error('gambar_produk') is-invalid @enderror shadow-none" accept="image/*">
                                                 @error('gambar_produk')
-                                                    <div class="invalid-feedback">
-                                                        {{ $message }}
-                                                    </div>
+                                                <div class="invalid-feedback">
+                                                    {{ $message }}
+                                                </div>
+                                                @enderror
+                                            </div>
+
+                                            <div class="mb-2">
+                                                <label>Fitur</label>
+                                                <div id="fitur-wrapper">
+                                                    <input type="text" name="fitur[]" class="form-control mb-2" placeholder="Fitur">
+                                                </div>
+                                                <button type="button" class="btn btn-sm btn-primary" id="add-fitur">
+                                                    + Tambah Fitur
+                                                </button>
+                                                @error('fitur')
+                                                <div class="invalid-feedback">{{ $message }}</div>
                                                 @enderror
                                             </div>
                                         </div>
@@ -96,10 +125,10 @@
                         @foreach ($data as $item)
                         <div class="col-md-4">
                             <div class="card">
-                                <a href="#"><img src="{{ asset('assets/img/' . $item->gambar_produk) }}" class="card-img-top" alt=""></a>
+                                <a href="{{ route('produk.show',$item->id) }}"><img src="{{ asset('assets/img/' . $item->gambar_produk) }}" class="card-img-top" alt=""></a>
                                 <div class="card-body p-0">
                                     <h5 class="card-title mt-3 ms-3">{{ $item->nama_produk }}</h5>
-                                    <div class="d-flex gap-2 justify-content-end mb-3 me-3">
+                                    <div class="d-flex gap-2 justify-content-end me-3">
 
                                         {{-- edit produk --}}
                                         <button type="button" class="btn btn-sm btn-primary shadow-none" data-bs-toggle="modal" data-bs-target="#edit-modal{{ $item->id }}"><i class="ti ti-pencil"></i></button>
@@ -114,6 +143,23 @@
                                                         @method('put')
                                                         @csrf
                                                         <div class="modal-body">
+                                                            <div class="mb-2">
+                                                                <label>Kategori Produk</label>
+                                                                <select name="kategori_id" class="form-control @error('kategori_id') is-invalid @enderror shadow-none">
+                                                                    <option value="">-- Pilih Kategori --</option>
+                                                                    @foreach($kategori as $k)
+                                                                    <option value="{{ $k->id }}" {{ $item->kategori_id == $k->id ? 'selected' : '' }}>
+                                                                        {{ $k->nama_kategori }}
+                                                                    </option>
+                                                                    @endforeach
+                                                                </select>
+                                                                @error('kategori_id')
+                                                                <div class="invalid-feedback">
+                                                                    {{ $message }}
+                                                                </div>
+                                                                @enderror
+                                                            </div>
+
                                                             <div class="mb-2">
                                                                 <label>Nama Produk</label>
                                                                 <input type="text" name="nama_produk" class="form-control @error('nama_produk') is-invalid @enderror shadow-none" value="{{ $item->nama_produk }}">
@@ -140,7 +186,27 @@
                                                                     </div>
                                                                 </div>
                                                             </div>
+
+                                                            <div class="mb-2">
+                                                                <label>Fitur</label>
+                                                                <div id="fitur-wrapper-{{ $item->id }}">
+                                                                    @foreach($item->fitur as $i => $fitur)
+                                                                    <div class="input-group mb-2">
+                                                                        <input type="text" name="fitur[]" class="form-control" value="{{ $fitur }}" placeholder="fitur {{ $i+1 }}">
+                                                                        <button type="button" class="btn btn-danger remove-fitur">Hapus</button>
+                                                                    </div>
+                                                                    @endforeach
+                                                                </div>
+                                                                <button type="button" class="btn btn-sm btn-primary add-upfitur" data-id="{{ $item->id }}">
+                                                                    + Tambah Fitur
+                                                                </button>
+
+                                                                @error('fitur')
+                                                                <div class="invalid-feedback">{{ $message }}</div>
+                                                                @enderror
+                                                            </div>
                                                         </div>
+
                                                         <div class="modal-footer">
                                                             <button type="button" class="btn btn-secondary shadow-none" data-bs-dismiss="modal">Tidak</button>
                                                             <button type="submit" class="btn btn-success shadow-none">Update</button>
@@ -176,6 +242,13 @@
                                         <a href="{{ route('produk.show',$item->id) }}" class="btn btn-sm btn-info shadow-none"><i class="ti ti-eye"></i></a>
                                     </div>
                                 </div>
+                                <hr>
+                                <b class="ms-3">Fitur Produk :</b>
+                                <ol class="ms-3">
+                                    @foreach($item->fitur as $f)
+                                    <li>{{ $f }}</li>
+                                    @endforeach
+                                </ol>
                             </div>
                         </div>
                         @endforeach

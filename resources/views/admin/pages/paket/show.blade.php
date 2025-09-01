@@ -168,17 +168,17 @@
 
                                                             <div class="mb-2">
                                                                 <label>Benefit</label>
-                                                                <div id="benefit-wrapper">
+                                                                <div id="benefit-wrapper-{{ $item->id }}">
                                                                     @foreach($item->benefit as $i => $benefit)
                                                                     <div class="input-group mb-2">
                                                                         <input type="text" name="benefit[]" class="form-control" value="{{ $benefit }}" placeholder="Benefit {{ $i+1 }}">
                                                                         <button type="button" class="btn btn-danger remove-benefit">Hapus</button>
                                                                     </div>
                                                                     @endforeach
-                                                                    <button type="button" class="btn btn-sm btn-primary" id="add-upbenefit">
-                                                                        + Tambah Benefit
-                                                                    </button>
                                                                 </div>
+                                                                <button type="button" class="btn btn-sm btn-primary add-upbenefit" data-id="{{ $item->id }}">
+                                                                    + Tambah Benefit
+                                                                </button>
 
                                                                 @error('benefit')
                                                                 <div class="invalid-feedback">{{ $message }}</div>
@@ -208,7 +208,7 @@
                                                     </div>
                                                     <div class="modal-footer">
                                                         <button type="button" class="btn btn-secondary shadow-none" data-bs-dismiss="modal">Tidak</button>
-                                                        <form action="" method="POST" style="display: inline;">
+                                                        <form action="{{ route('paket.subdestroy', $item->id) }}" method="POST" style="display: inline;">
                                                             @method('delete')
                                                             @csrf
                                                             <input type="submit" value="Hapus" class="btn btn-danger shadow-none">

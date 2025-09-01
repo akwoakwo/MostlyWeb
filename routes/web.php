@@ -36,12 +36,13 @@ Route::middleware('auth')->group(function () {
     Route::get('/dashboard', [UserController::class, 'dashboard'])->name('dashboard');
     Route::resource('/paket', PaketController::class)->names('paket');
     Route::post('/paket/{id}/subpaket', [PaketController::class, 'substore'])->name('paket.substore');
-    Route::put('/paket/subpaket/{id}', [PaketController::class, 'subupdate'])->name('paket.subupdate');
+    Route::put('/paket/subupdate/{id}', [PaketController::class, 'subupdate'])->name('paket.subupdate');
+    Route::delete('/paket/subdestory/{id}', [PaketController::class, 'subdestroy'])->name('paket.subdestroy');
     Route::resource('/show', SubpaketController::class)->names('show');
     Route::resource('/kategori', KategoriController::class)->names('kategori');
     Route::resource('/produk', ProdukController::class)->names('produk');
     Route::post('/produk/{id}/preview', [ProdukController::class, 'prestore'])->name('produk.prestore');
-    Route::delete('produk/{preview}', [ProdukController::class,'predestroy'])->name('produk.predestroy');
+    Route::delete('produk/preview/{id}', [ProdukController::class, 'predestroy'])->name('produk.predestroy');
     Route::resource('/data-admin', AdminController::class)->names('data-admin');
     Route::resource('/ulasan', ReviewController::class)->names('ulasan');
     Route::resource('/faq', FaqController::class)->names('faq');

@@ -81,13 +81,58 @@
             {{-- tambah data --}}
             <form action="{{ route('produk.prestore', $produk->id) }}" method="POST" enctype="multipart/form-data">
                 @csrf
-                <input type="hidden" name="produk_id" value="{{ $produk->id }}">
                 <div class="mb-3">
-                    <label>Tambah Preview Produk</label>
+                    <label><h5>Tambah Preview Produk</h5></label>
                     <input type="file" name="gambar" class="form-control" required>
                 </div>
-                <button type="submit" class="btn btn-primary btn-sm">Tambah</button>
+                <button type="submit" class="btn btn-primary btn-sm">Tambah Preview</button>
             </form>
+
+            <hr>
+            <h5>Kelola Logo Produk</h5>
+
+            <!-- Tombol pilih metode -->
+            <div class="btn-group mb-3" role="group">
+                <input type="radio" class="btn-check" name="pilihan_logo" id="logoBaruBtn" autocomplete="off" checked>
+                <label class="btn btn-outline-primary" for="logoBaruBtn">Tambah Logo Baru</label>
+
+                <input type="radio" class="btn-check" name="pilihan_logo" id="logoDatabaseBtn" autocomplete="off">
+                <label class="btn btn-outline-secondary" for="logoDatabaseBtn">Pilih dari Database</label>
+            </div>
+
+            <!-- Form Tambah Logo Baru -->
+            <div id="formLogoBaru">
+                <form action="{{ route('produk.prestore', $produk->id) }}" method="POST" enctype="multipart/form-data" class="mt-4">
+                    @csrf
+                    <h5>Tambah Logo Baru</h5>
+                    <div class="mb-3">
+                        <label>Nama Logo</label>
+                        <input type="text" name="nama_logo" class="form-control" required>
+                    </div>
+                    <div class="mb-3">
+                        <label>Upload Logo</label>
+                        <input type="file" name="logo_baru" class="form-control" required>
+                    </div>
+                    <button type="submit" class="btn btn-success btn-sm">Tambah Logo Baru</button>
+                </form>
+            </div>
+
+            <!-- Form Tambah Logo dari Database -->
+            <div id="formLogoDatabase" style="display: none;">
+                <form action="{{ route('produk.prestore', $produk->id) }}" method="POST" class="mt-4">
+                    @csrf
+                    <h5>Tambahkan Logo dari Database</h5>
+                    <div class="mb-3">
+                        <select name="logo_id" class="form-control" required>
+                            <option value="">-- Pilih Logo --</option>
+                            @foreach(App\Models\Logo::all() as $logo)
+                                <option value="{{ $logo->id }}">{{ $logo->nama_logo }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                    <button type="submit" class="btn btn-info btn-sm">Tambah Logo</button>
+                </form>
+            </div>
 
             <hr>
 
@@ -98,7 +143,7 @@
                 <div class="card" style="width: 12rem;">
                     <img src="{{ asset('assets/img/'.$preview->gambar) }}" class="card-img-top">
                     <div class="card-body text-center">
-                        <form action="{{ route('produk.predestroy', $produk->id) }}" method="POST">
+                        <form action="{{ route('produk.predestroy', $preview->id) }}" method="POST">
                             @csrf
                             @method('DELETE')
                             <button class="btn btn-danger btn-sm">Hapus</button>

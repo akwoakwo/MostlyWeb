@@ -267,6 +267,11 @@ nav {
     background: var(--white-color);
 }
 
+.badge-fitur {
+    background-color: var(--secondary-color);
+    color: var(--white-color);
+}
+
 /* Kontak */
 .container-konsultasi {
     background-color: var(--secondary-color);

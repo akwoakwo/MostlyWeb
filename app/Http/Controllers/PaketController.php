@@ -113,4 +113,12 @@ class PaketController extends Controller
 
         return redirect()->back()->with('success', 'Sub Paket berhasil diupdate');
     }
-}
+
+    public function subdestroy($id)
+    {
+        $subpaket = Subpaket::findOrFail($id);
+        $subpaket->delete();
+
+        return redirect()->back()->with('success', 'Sub Paket berhasil dihapus');
+    }
+    }
