@@ -36,6 +36,41 @@
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Cek apakah ada pesan 'info' dari session
+            @if(session('info'))
+                Swal.fire({
+                    icon: 'info',
+                    title: 'Informasi',
+                    html: `{!! session('info') !!}`,
+                    showConfirmButton: true,
+                });
+            @endif
+            
+            // Anda juga bisa menambahkan ini untuk pesan success atau error
+            @if(session('success'))
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Berhasil',
+                    html: `{!! session('success') !!}`,
+                    showConfirmButton: true,
+                });
+            @endif
+            
+            @if(session('error'))
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Gagal',
+                    html: `{!! session('error') !!}`,
+                    showConfirmButton: true,
+                });
+            @endif
+        });
+    </script>
+
 
     <script>
         document.querySelectorAll(".lihat-selengkapnya").forEach(btn => {
@@ -53,86 +88,97 @@
             const kategoriBoxes = document.querySelectorAll(".kategori-box");
             const cards = document.querySelectorAll("#produk-container .col-md-6");
 
-            let activeKategoriBox = document.querySelector(".kategori-box.active-kategori") || kategoriBoxes[0];
-            let activeKategori = activeKategoriBox ? activeKategoriBox.getAttribute("data-kategori") : null;
+            // Periksa apakah elemen ada sebelum memproses
+            if (kategoriBoxes.length > 0 && cards.length > 0) {
+                let activeKategoriBox = document.querySelector(".kategori-box.active-kategori") || kategoriBoxes[0];
+                let activeKategori = activeKategoriBox ? activeKategoriBox.getAttribute("data-kategori") : null;
 
-            if (activeKategori) {
-                cards.forEach(card => {
-                    if (card.getAttribute("data-kategori") === activeKategori) {
-                        card.style.display = "block";
-                    } else {
-                        card.style.display = "none";
-                    }
-                });
-            }
-
-            kategoriBoxes.forEach(box => {
-                box.addEventListener("click", function() {
-                    let kategori = this.getAttribute("data-kategori");
-                    if (!kategori) return;
-
-                    kategoriBoxes.forEach(b => b.classList.remove("active-kategori"));
-                    this.classList.add("active-kategori");
-
-                    // Filter produk
+                if (activeKategori) {
                     cards.forEach(card => {
-                        if (card.getAttribute("data-kategori") === kategori) {
+                        if (card.getAttribute("data-kategori") === activeKategori) {
                             card.style.display = "block";
                         } else {
                             card.style.display = "none";
                         }
                     });
+                }
+
+                kategoriBoxes.forEach(box => {
+                    box.addEventListener("click", function() {
+                        let kategori = this.getAttribute("data-kategori");
+                        if (!kategori) return;
+
+                        kategoriBoxes.forEach(b => b.classList.remove("active-kategori"));
+                        this.classList.add("active-kategori");
+
+                        cards.forEach(card => {
+                            if (card.getAttribute("data-kategori") === kategori) {
+                                card.style.display = "block";
+                            } else {
+                                card.style.display = "none";
+                            }
+                        });
+                    });
                 });
-            });
+            }
         });
     </script>
 
     <script>
-        var swiper = new Swiper(".mySwiper", {
-            slidesPerView: 3,
-            spaceBetween: 20,
-            pagination: {
-                el: ".swiper-pagination",
-                clickable: true,
-            },
-            breakpoints: {
-                0: {
-                    slidesPerView: 1,
+        const mySwiper = document.querySelector(".mySwiper");
+        if (mySwiper) {
+            new Swiper(".mySwiper", {
+                slidesPerView: 3,
+                spaceBetween: 20,
+                pagination: {
+                    el: ".swiper-pagination",
+                    clickable: true,
                 },
-                768: {
-                    slidesPerView: 2,
-                },
-                992: {
-                    slidesPerView: 3,
+                breakpoints: {
+                    0: {
+                        slidesPerView: 1,
+                    },
+                    768: {
+                        slidesPerView: 2,
+                    },
+                    992: {
+                        slidesPerView: 3,
+                    }
                 }
-            }
-        });
+            });
+        }
     </script>
 
     <script>
         const scrollBtn = document.getElementById("scrollTopBtn");
 
         window.onscroll = function() {
-            if (document.body.scrollTop > 200 || document.documentElement.scrollTop > 200) {
-                scrollBtn.style.display = "block";
-            } else {
-                scrollBtn.style.display = "none";
+            // Periksa apakah elemen ada sebelum memproses
+            if (scrollBtn) {
+                if (document.body.scrollTop > 200 || document.documentElement.scrollTop > 200) {
+                    scrollBtn.style.display = "block";
+                } else {
+                    scrollBtn.style.display = "none";
+                }
             }
         };
     </script>
 
     <script>
-        var swiper = new Swiper(".myPreviewSwiper", {
-            loop: true,
-            pagination: {
-                el: ".swiper-pagination",
-                clickable: true,
-            },
-            navigation: {
-                nextEl: ".swiper-button-next",
-                prevEl: ".swiper-button-prev",
-            },
-        });
+        const myPreviewSwiper = document.querySelector(".myPreviewSwiper");
+        if (myPreviewSwiper) {
+            new Swiper(".myPreviewSwiper", {
+                loop: true,
+                pagination: {
+                    el: ".swiper-pagination",
+                    clickable: true,
+                },
+                navigation: {
+                    nextEl: ".swiper-button-next",
+                    prevEl: ".swiper-button-prev",
+                },
+            });
+        }
     </script>
 
     <script>

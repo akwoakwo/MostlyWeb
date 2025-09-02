@@ -31,28 +31,57 @@
                 </li>
             </ul>
 
+            @php
+                use Illuminate\Support\Facades\Auth;
+                use App\Models\Pemesanan;
+                $pendingOrder = Pemesanan::where('user_id', Auth::id())
+                    ->where('status_pembayaran', 'pending')
+                    ->first();
+            @endphp
+
             <div class="button-auth d-lg-flex ms-lg-3 mt-3 mt-lg-0">
                 @auth
-                    <img src="{{ asset('assets/img/'.auth()->user()->gambar) }}" alt="Logo" width="35" height="35" class="d-inline-block align-text-top bg-white rounded-circle">
+                    {{-- Cek pemesanan pending untuk user yang login --}}
+                    @if ($pendingOrder)
+                        <div class="position-relative me-3 d-flex align-items-center">
+                            <a href="{{ route('pemesanan.detail', $pendingOrder->invoice_number) }}" class="text-dark">
+                                <i class="bi bi-bag-fill" style="font-size: 1.2rem;"></i>
+                               <span class="position-absolute top-20 start-100 translate-middle p-2 bg-danger border border-light rounded-circle">
+                                    <span class="visually-hidden">pending orders</span>
+                                </span>
+                            </a>
+                        </div>
+                    @endif
+                    @if (auth()->user()->gambar === null)
+                        <img src="{{ auth()->user()->avatar }}" alt="Logo" width="35" height="35"
+                            class="d-inline-block align-text-top bg-white rounded-circle">
+                    @else
+                        <img src="{{ asset('assets/img/' . auth()->user()->gambar) }}" alt="Logo" width="35"
+                        height="35" class="d-inline-block align-text-top bg-white rounded-circle">
+                    @endif
                     <div class="dropdown">
-                        <a class="btn fw-bold dropdown-toggle text-center" href="#" role="button" id="userDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                        <a class="btn fw-bold dropdown-toggle text-center" href="#" role="button" id="userDropdown"
+                            data-bs-toggle="dropdown" aria-expanded="false">
                             {{ Auth::user()->name }}
                         </a>
                         <ul class="dropdown-menu" aria-labelledby="userDropdown">
                             <li><a class="dropdown-item" href="/profil-user">Profil</a></li>
                             <li>
-                                <a class="dropdown-item" href="{{ route('logout') }}">Logout</a></button>
+                                <a class="dropdown-item" href="{{ route('logout') }}">Logout</a>
                             </li>
                         </ul>
                     </div>
                 @else
-                    <a class="btn login-btn me-2 fw-semibold" href="#" data-bs-toggle="modal" data-bs-target="#loginModal">Masuk</a>
-                    <a class="btn register-btn me-2 fw-semibold" href="#" data-bs-toggle="modal" data-bs-target="#registerModal">Daftar</a>
+                    <a class="btn login-btn me-2 fw-semibold" href="#" data-bs-toggle="modal"
+                        data-bs-target="#loginModal">Masuk</a>
+                    <a class="btn register-btn me-2 fw-semibold" href="#" data-bs-toggle="modal"
+                        data-bs-target="#registerModal">Daftar</a>
                 @endauth
             </div>
         </div>
     </div>
 </nav>
+
 
 <!-- Login Modal -->
 <div class="modal fade" id="loginModal" tabindex="-1" aria-labelledby="loginModalLabel" aria-hidden="true">
@@ -86,7 +115,7 @@
                 <div class="text-center mb-3">
                     <p class="text-muted mb-2">Atau Masuk Dengan</p>
                     <div class="d-grid mb-3">
-                        <button type="button" class="btn btn-outline-dark btn-google"><img src="https://www.svgrepo.com/show/355037/google.svg" width="20" alt="Google Logo"></button>
+                        <a href="{{ route('login.google') }}" type="button" class="btn btn-outline-dark btn-google"><img src="https://www.svgrepo.com/show/355037/google.svg" width="20" alt="Google Logo"></a>
                     </div>
                 </div>
 
@@ -154,3 +183,4 @@
         </div>
     </div>
 </div>
+

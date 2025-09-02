@@ -2,7 +2,7 @@
 @section('title','Profil - MostlyWeb')
 
 @section('content')
-<section class="p-4 col-md-9 col-lg-10">
+<section class="p-4 col-md-9 col-lg-10 w-100">
     <h3 class="fw-bold mb-4">Pengaturan Profil</h3>
 
     {{-- Alert success / error --}}
@@ -25,12 +25,22 @@
             @method('PUT')
 
             <div class="mb-3 text-center">
+                @if (auth()->user()->google_id != null)
+                    <img id="previewImage"
+                        src="{{ auth()->user()->avatar }}"
+                        alt="Profile"
+                        class="rounded-circle mb-3"
+                        style="width:120px; height:120px; object-fit:cover;">
+                    <input type="file" name="avatar" id="profileImage" class="form-control" accept="image/*">
+                @else
+                    
                 <img id="previewImage"
                     src="{{ asset('assets/img/'.auth()->user()->gambar) }}"
                     alt="Profile"
                     class="rounded-circle mb-3"
                     style="width:120px; height:120px; object-fit:cover;">
-                <input type="file" name="gambar" id="profileImage" class="form-control" accept="image/*">
+                    <input type="file" name="gambar" id="profileImage" class="form-control" accept="image/*">
+                @endif
             </div>
 
             <div class="mb-3">

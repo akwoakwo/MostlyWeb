@@ -53,7 +53,7 @@
                             <a href="{{ route('data-admin.create') }}" class="btn btn-primary shadow-none"> Tambah Admin Baru </a>
                         </div>
 
-                        <div class="table-responsive">
+                        <div class="table-responsive text-center">
                         <table class="table table-striped table-bordered" id="editable-datatable">
                             <thead>
                             <tr>
@@ -62,6 +62,7 @@
                                 <th>No Telpon</th>
                                 <th>Email</th>
                                 <th>Profile</th>
+                                <th>Aksi</th>
                             </tr>
                             </thead>
                             <tbody>

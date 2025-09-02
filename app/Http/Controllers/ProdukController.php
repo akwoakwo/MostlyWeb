@@ -13,24 +13,43 @@ use App\Http\Controllers\Controller;
 
 class ProdukController extends Controller
 {
-    public function produk()
+    public function desainProduk(Request $request)
     {
-        return view('produk', [
-            'title' => 'produk',
-            'kategori' => Kategori::all(),
-            'produk' => Produk::all(),
-        ]);
+        $kategori = Kategori::all();
+        $produk = Produk::all();
+
+        return view('produk', compact('kategori', 'produk'));
     }
 
-    public function preview($id)
+    public function produk(Request $request)
     {
-        $produk = Produk::with(['previews', 'logos'])->findOrFail($id);
+        $subpaket_id = $request->input('subpaket_id');
+        $subpaket = Subpaket::findOrFail($subpaket_id);
+        $kategori = Kategori::all();
+        $produk = Produk::all();
 
-        return view('preview_produk', [
-            'title' => 'preview',
-            'produk' => $produk,
-        ]);
+        return view('produk', compact('kategori', 'produk', 'subpaket'));
     }
+
+    /**
+     * Menampilkan halaman pratinjau produk.
+     * Menerima ID produk dari rute dan ID subpaket dari query string.
+     */
+    public function previewProduk($id, Request $request)
+    {
+        $produk = Produk::findOrFail($id);
+        $subpaket_id = $request->input('subpaket_id');
+
+        return view('preview_produk', compact('produk', 'subpaket_id'));
+    }
+
+    public function preview($id, Request $request)
+    {
+        $produk = Produk::findOrFail($id);
+        $detailPakets = Subpaket::all();
+        return view('preview_produk', compact('produk', 'detailPakets'));
+    }
+
 
     public function index()
     {

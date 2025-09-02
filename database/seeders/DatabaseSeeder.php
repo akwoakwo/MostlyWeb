@@ -291,33 +291,33 @@ class DatabaseSeeder extends Seeder
             "jawaban" => "Biaya pembuatan website sudah termasuk domain dan hosting tahun pertama, selanjutnya bisa diperpanjang sesuai kebutuhan.",
         ]]);
 
-        DB::table('pemesanans')->insert([[
-            "user_id" => 2,
-            "subpaket_id" => 1,
-            'produk_id' => 1,
-            'catatan' => 'Web ini diperlukan cepat'
-        ],[
-            "user_id" => 2,
-            "subpaket_id" => 2,
-            'produk_id' => 1,
-            'catatan' => '-'
-        ],[
-            "user_id" => 2,
-            "subpaket_id" => 3,
-            'produk_id' => 1,
-            'catatan' => 'Desainnya menggunakan tema berwarna biru'
-        ]]);
+        // DB::table('pemesanans')->insert([[
+        //     "user_id" => 2,
+        //     "subpaket_id" => 1,
+        //     'produk_id' => 1,
+        //     'catatan' => 'Web ini diperlukan cepat'
+        // ],[
+        //     "user_id" => 2,
+        //     "subpaket_id" => 2,
+        //     'produk_id' => 1,
+        //     'catatan' => '-'
+        // ],[
+        //     "user_id" => 2,
+        //     "subpaket_id" => 3,
+        //     'produk_id' => 1,
+        //     'catatan' => 'Desainnya menggunakan tema berwarna biru'
+        // ]]);
 
-        DB::table('reviews')->insert([[
-            "pemesanan_id" => 1,
-            "user_id" => 2,
-            'rating' => 3,
-            'ulasan' => 'Harga terjangkau dengan kualitas website yang sangat bagus. Rekomendasi banget!'
-        ],[
-            "pemesanan_id" => 3,
-            "user_id" => 2,
-            'rating' => 5,
-            'ulasan' => 'Website toko online saya jadi lebih profesional dan pelanggan semakin mudah berbelanja. Terima kasih!'
-        ]]);
+        // DB::table('reviews')->insert([[
+        //     "pemesanan_id" => 1,
+        //     "user_id" => 2,
+        //     'rating' => 3,
+        //     'ulasan' => 'Harga terjangkau dengan kualitas website yang sangat bagus. Rekomendasi banget!'
+        // ],[
+        //     "pemesanan_id" => 3,
+        //     "user_id" => 2,
+        //     'rating' => 5,
+        //     'ulasan' => 'Website toko online saya jadi lebih profesional dan pelanggan semakin mudah berbelanja. Terima kasih!'
+        // ]]);
     }
 }
