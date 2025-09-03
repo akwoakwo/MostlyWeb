@@ -105,6 +105,7 @@ class UserController extends Controller
             'email'  => 'required|email|max:255|unique:users,email,' . $user->id,
             'password' => 'nullable|string|min:6',
             'gambar'   => 'nullable|image|mimes:jpg,jpeg,png,webp|max:2048',
+            'avatar'   => 'nullable|image|mimes:jpg,jpeg,png,webp|max:2048',
         ]);
 
         // Update field dasar
@@ -122,6 +123,13 @@ class UserController extends Controller
         if($request->has(('gambar'))){
             $request->file('gambar')->move('assets/img/', $request->file('gambar')->getClientOriginalName());
             $user->gambar = $request->file('gambar')->getClientOriginalName();
+            $user->save();
+        }
+
+        $user->update($request->only(['avatar']));
+        if($request->has(('avatar'))){
+            $request->file('avatar')->move('assets/img/', $request->file('avatar')->getClientOriginalName());
+            $user->avatar = $request->file('avatar')->getClientOriginalName();
             $user->save();
         }
 

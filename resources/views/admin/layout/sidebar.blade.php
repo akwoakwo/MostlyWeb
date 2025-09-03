@@ -30,7 +30,7 @@
                     <span class="hide-menu">Pesanan</span>
                 </li>
                 <li class="sidebar-item">
-                    <a class="sidebar-link" href="#" aria-expanded="false">
+                    <a class="sidebar-link" href="{{ route('admin.pemesanan.index') }}" aria-expanded="false">
                         <span>
                             <i class="ti ti-shopping-cart"></i>
                         </span>
@@ -38,7 +38,7 @@
                     </a>
                 </li>
                 <li class="sidebar-item">
-                    <a class="sidebar-link" href="#" aria-expanded="false">
+                    <a class="sidebar-link" href="{{ route('admin.pembayaran.index') }}" aria-expanded="false">
                         <span>
                             <i class="ti ti-credit-card"></i>
                         </span>

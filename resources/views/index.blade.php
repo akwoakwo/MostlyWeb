@@ -276,7 +276,7 @@
             @foreach ($kategori as $item)
                 <div class="kategori-box text-center {{ $loop->first ? 'active-kategori' : '' }}" data-kategori="{{ $item->id }}">{{ $item->nama_kategori }}</div>
             @endforeach
-            <div class="kategori-box text-center bg-dark text-white" onclick="window.location.href='/produk'">Selengkapnya</div>
+            <a href="/desain-produk" type="button" class="kategori-box text-center bg-dark text-white text-decoration-none">Selengkapnya</a>
         </div>
 
         <div id="produk-container" class="row g-4 justify-content-center">

@@ -14,7 +14,18 @@ class Pemesanan extends Model
     use HasFactory;
     protected $table = 'pemesanans';
     protected $guarded = [];
-    protected $fillable=['id', 'user_id', 'subpaket_id', 'produk_id'];
+    protected $fillable = [
+        'user_id',
+        'subpaket_id',
+        'produk_id',
+        'catatan', // Tambahan dari migrasi
+        'invoice_number',
+        'domain',
+        'total_harga',
+        'status_pembayaran',
+        'token_midtrans',
+        'metode_pembayaran',
+    ];
 
     public function user()
     {
@@ -31,8 +42,13 @@ class Pemesanan extends Model
         return $this->belongsTo(Produk::class, 'produk_id');
     }
 
-        public function ulasan()
+    public function ulasan()
     {
         return $this->hasOne(Review::class, 'pemesanan_id', 'id');
+    }
+
+    public function pembayaran()
+    {
+        return $this->hasOne(Pembayaran::class, 'pemesanan_id');
     }
 }

@@ -41,7 +41,7 @@
     }
   </style>
 
-<section class="p-4 col-md-9 col-lg-10">
+<section class="p-4 col-md-9 col-lg-10  w-100">
     <h3 class="fw-bold mb-4">Review Pemesanan</h3>
 
     <div class="card shadow-sm p-4">
@@ -69,7 +69,11 @@
                                     <tr>
                                         <td> Jenis Desain </td>
                                         <td> : </td>
-                                        <td> be belom </td>
+                                        @if ($data->produk_id)
+                                            <td> {{ $data->produk->nama_produk }} </td>
+                                        @else
+                                            <td> Custom </td>
+                                        @endif
                                     </tr>
                                 </table>
                             </div>

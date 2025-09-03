@@ -315,7 +315,9 @@ nav {
 
 /* Halaman Customer */
 .page-customer {
-    padding: 0;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
 }
 
 .sidebar-customer {
@@ -323,8 +325,11 @@ nav {
     position: fixed;
     top: 0;
     left: 0;
+    height: 100vh;
+    z-index: 1041;
     transition: transform 0.3s ease;
-    z-index: 1040;
+    flex-shrink: 0;
+    transform: translateX(-100%); /* Sembunyikan secara default di mobile */
 }
 
 .sidebar-img {
@@ -356,7 +361,7 @@ nav {
     width: 100%;
     height: 100%;
     background-color: rgba(0,0,0,0.5);
-    z-index: 1030;
+    z-index: 1040;
 }
 
 .btn-customer {
@@ -374,48 +379,89 @@ nav {
     position: fixed;
     top: 10px;
     left: 10px;
-    z-index: 1050;
-    display: none;
+    z-index: 1051;
 }
 
+/* Kontainer utama yang berisi sidebar dan konten utama */
+.main-container {
+    flex-grow: 1; /* Kontainer ini akan mengambil sisa ruang yang tersedia */
+}
+
+
 .main-content {
-    margin-left: 250px;
+    flex-grow: 1; /* Konten utama akan mengambil semua ruang yang tersisa */
+    padding: 20px; /* Opsional: Tambahkan padding untuk estetika */
     transition: margin-left 0.3s ease;
 }
 
 /* Responsive */
-@media (min-width: 992px) {
-    .nav-link {
-        display: block;
-    }
-}
 
-@media (max-width: 769px) {
-    .button-auth {
+/* Untuk desktop dan laptop (resolusi lebih besar dari 768px) */
+@media (min-width: 769px) {
+    .page-customer {
+        padding-top: 0; /* Hapus padding-top di desktop */
+    }
+    
+    .main-container {
         display: flex;
-        justify-content: center;
-        gap: 10px;
-        margin-top: 10px;
-    }
-
-    .profil-baris {
-        margin-left: 0;
+        flex-direction: row;
     }
 
     .sidebar-customer {
-        transform: translateX(-100%);
+        position: relative; /* Kembali ke posisi normal */
+        transform: translateX(0); /* Tampilkan sidebar */
+        flex-shrink: 0; /* Mencegah sidebar menyusut */
+        width: 250px;
+        z-index: auto; /* Kembalikan z-index default */
+    }
+
+    .main-content { /* Beri ruang untuk sidebar */
+        width: auto;
     }
 
     #sidebarToggle {
-        display: block;
+        display: none; /* Sembunyikan di desktop */
+    }
+}
+
+
+---
+
+/* Untuk tablet dan mobile (resolusi maksimal 768px) */
+@media (max-width: 769px) {
+    /* Sidebar akan disembunyikan di luar layar */
+    .page-customer {
+        padding-top: 50px; /* Ruang untuk tombol toggle */
+    }
+
+    #sidebarToggle {
+        display: block; /* Tampilkan di mobile secara default */
+        position: fixed;
+        top: 10px;
+        left: 10px;
+        z-index: 1051;
+    }
+
+    .sidebar-customer {
+        background-color: var(--orange-color);
+        position: fixed; /* Posisikan fixed agar bisa digeser */
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100vh;
+        z-index: 1050; /* Naikkan z-index */
+        transition: transform 0.3s ease;
+        transform: translateX(100%); /* Sembunyikan default */
     }
 
     .main-content {
         margin-left: 0;
-        margin-top: 40px;
     }
 }
 
+---
+
+/* Tambahan perbaikan untuk masalah minor */
 @media (max-width: 576px) {
     .nav-pills {
         flex-direction: column;
@@ -436,6 +482,7 @@ nav {
         margin: 0 5px;
     }
 
+    /* Memastikan elemen flex-wrap berfungsi dengan baik */
     .d-flex.flex-wrap {
         flex-wrap: nowrap !important;
         overflow-x: auto;
@@ -450,9 +497,5 @@ nav {
     .btn-konsultasi a {
         width: 100%;
         max-width: 280px;
-    }
-
-    .profil-baris {
-        margin-left: 0;
     }
 }
