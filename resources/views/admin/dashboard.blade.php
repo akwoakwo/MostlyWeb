@@ -3,6 +3,11 @@
 
 @section('content')
 <div class="row">
+
+    @php
+        use Illuminate\Support\Facades\Auth;
+    @endphp
+    
     <div class="col-12">
         <div class="d-flex align-items-center gap-4 mb-4">
         <div class="position-relative">

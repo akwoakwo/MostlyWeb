@@ -84,7 +84,7 @@
                                         @endif
                                     </td>
                                     <td>
-                                        <a href="{{ route('admin.pemesanan.show', $item->id) }}" class="btn btn-primary btn-sm"> <i class="ti ti-eye"></i> Lihat Detail</a>
+                                        <a href="{{ route('admin.pemesanan.show', $item->id) }}" class="btn btn-primary btn-sm"> <i class="ti ti-eye"></i></a>
                                     </td>
                                 </tr>
                             @endforeach
