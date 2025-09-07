@@ -58,13 +58,18 @@ class PemesananController extends Controller
         $request->validate([
             'subpaket_id' => 'required|exists:detail_pakets,id',
             'produk_id' => 'nullable|exists:produks,id',
-            'nama_domain' => 'required|string|max:255',
-            'ekstensi_domain' => 'required|string|max:10',
+            'nama_domain' => 'nullable|string|max:255',
+            'ekstensi_domain' => 'nullable|string|max:10',
             'catatan' => 'nullable|string',
         ]);
+
+        if($request->input('nama_domain')) {
+            // Gabungkan nama domain dan ekstensinya
+            $fullDomain = $request->input('nama_domain') . $request->input('ekstensi_domain');
+        }else{
+            $fullDomain = null;
+        }
         
-        // Gabungkan nama domain dan ekstensinya
-        $fullDomain = $request->input('nama_domain') . $request->input('ekstensi_domain');
         
         // Ambil data subpaket untuk mendapatkan harga
         $subpaket = Subpaket::findOrFail($request->input('subpaket_id'));

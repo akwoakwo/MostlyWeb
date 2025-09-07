@@ -52,14 +52,16 @@
                                                     style="width:100%; object-fit: cover;">
                                                 <div>
                                                     <button type="button" id="remove-design-btn"
-                                                    class="btn-close position-absolute end-0 m-3"></button>
+                                                        class="btn-close position-absolute end-0 m-3"></button>
                                                     <h6 class="mb-0 fw-semibold">{{ $produk->nama_produk }}</h6>
                                                     <a href="{{ route('list.produk', ['subpaket_id' => $subpaket->id]) }}"
-                                                        type="button" class="btn btn-sm register-btn px-1 mt-1">Ganti Desain</a>
+                                                        type="button" class="btn btn-sm register-btn px-1 mt-1">Ganti
+                                                        Desain</a>
                                                 </div>
                                             </div>
                                         @else
-                                            <div id="tambah-desain-btn" class="d-flex flex-wrap justify-content-center gap-3 mt-2">
+                                            <div id="tambah-desain-btn"
+                                                class="d-flex flex-wrap justify-content-center gap-3 mt-2">
                                                 <a href="{{ route('list.produk', ['subpaket_id' => $subpaket->id]) }}"
                                                     class="btn btn-light btn-konsultasi px-4 py-2 fw-semibold">
                                                     <i class="bi bi-plus-circle"></i> Tambah Desain Katalog
@@ -98,33 +100,38 @@
 
                             <!-- Input tersembunyi untuk menyimpan produk_id jika dipilih -->
                             @if (request()->has('produk_id'))
-                                <input type="hidden" name="produk_id" id="produk-id-input" value="{{ request('produk_id') }}">
+                                <input type="hidden" name="produk_id" id="produk-id-input"
+                                    value="{{ request('produk_id') }}">
                             @endif
 
-                            <!-- Input nama domain dan ekstensi -->
-                            <div class="mb-3">
-                                <label for="domain" class="form-label">Nama Domain Web</label>
-                                <div class="row g-3">
-                                    <div class="col-md-10">
-                                        <input type="text" class="form-control" name="nama_domain" id="domain"
-                                            placeholder="nama domain anda" required pattern="^[a-z0-9]+(-[a-z0-9]+)*$"
-                                            title="Gunakan huruf kecil, angka, dan tanda minus (-) tanpa spasi">
-                                    </div>
-                                    <div class="col-md-2">
-                                        <select class="form-select" name="ekstensi_domain" id="ekstensi-domain" required>
-                                            <option value=".com">.com</option>
-                                            <option value=".id">.id</option>
-                                            <option value=".co.id">.co.co.id</option>
-                                            <option value=".net">.net</option>
-                                            <option value=".org">.org</option>
-                                            <option value=".info">.info</option>
-                                        </select>
+                            @if ($subpaket->paket->nama_paket === 'Bisnis')
+                                <!-- Input nama domain dan ekstensi -->
+                                <div class="mb-3">
+                                    <label for="domain" class="form-label">Nama Domain Web</label>
+                                    <div class="row g-3">
+                                        <div class="col-md-10">
+                                            <input type="text" class="form-control" name="nama_domain" id="domain"
+                                                placeholder="nama domain anda" required pattern="^[a-z0-9]+(-[a-z0-9]+)*$"
+                                                title="Gunakan huruf kecil, angka, dan tanda minus (-) tanpa spasi">
+                                        </div>
+                                        <div class="col-md-2">
+                                            <select class="form-select" name="ekstensi_domain" id="ekstensi-domain"
+                                                required>
+                                                <option value=".com">.com</option>
+                                                <option value=".id">.id</option>
+                                                <option value=".co.id">.co.co.id</option>
+                                                <option value=".net">.net</option>
+                                                <option value=".org">.org</option>
+                                                <option value=".info">.info</option>
+                                            </select>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
+                            @endif
                             <div class="mb-3">
                                 <label for="catatan" class="form-label">Catatan Tambahan</label>
-                                <textarea class="form-control" id="catatan" name="catatan" rows="3" placeholder="Tuliskan catatan jika ada"></textarea>
+                                <textarea class="form-control" id="catatan" name="catatan" rows="3"
+                                    placeholder="Tuliskan catatan jika ada"></textarea>
                             </div>
                             <div class="text-center">
                                 <button type="submit" class="btn btn-success px-4 py-2 fw-semibold">
@@ -173,7 +180,8 @@
 
             // Sanitasi input domain
             document.getElementById('domain').addEventListener('input', function() {
-                this.value = this.value.toLowerCase().replace(/[^a-z0-9-]/g, '').replace(/^-+|-+$/g, '').replace(/--+/g, '-');
+                this.value = this.value.toLowerCase().replace(/[^a-z0-9-]/g, '').replace(/^-+|-+$/g, '')
+                    .replace(/--+/g, '-');
             });
         });
     </script>

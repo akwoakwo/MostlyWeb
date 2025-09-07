@@ -82,6 +82,9 @@
                     <hr>
                     <p><strong>Nama Paket:</strong> {{ $pemesanan->subpaket->paket->nama_paket ?? '-' }}</p>
                     <p><strong>Sub Paket:</strong> {{ $pemesanan->subpaket->nama_subpaket ?? '-' }}</p>
+                    @if (isset($pemesanan->domain))
+                        <p><strong>Nama Domain:</strong> {{ $pemesanan->domain }}</p>
+                    @endif
                     <h6><strong>Benefit:</strong></h6>
                     <ul>
                         @foreach($pemesanan->subpaket->benefit ?? [] as $benefit)

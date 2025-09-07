@@ -18,7 +18,9 @@
                             <div class="col-md-6 align-self-center">
                                 <p class="mb-1"><b>Nama:</b> {{ $pemesanan->user->name }}</p>
                                 <p class="mb-1"><b>Email:</b> {{ $pemesanan->user->email }}</p>
-                                <p class="mb-1"><b>Nama Domain:</b> {{ $pemesanan->domain }}</p>
+                                @if (isset($pemesanan->domain))
+                                    <p class="mb-1"><b>Nama Domain:</b> {{ $pemesanan->domain }}</p>
+                                @endif
                                 <p class="mb-1"><b>Status Pembayaran:</b> <span
                                         class="badge bg-warning">{{ $pemesanan->status_pembayaran }}</span></p>
                                 @if ($pemesanan->catatan)
@@ -130,7 +132,15 @@
                     const snapToken = data.snap_token;
 
                     // Bangun pesan WhatsApp
-                    let waMessage = `*Pemesanan Baru (Menunggu Pembayaran)*\n\n*Invoice:* {{ $pemesanan->invoice_number }}\n*Nama:* {{ $pemesanan->user->name }}\n*Email:* {{ $pemesanan->user->email }}\n*Paket:* {{ $pemesanan->subpaket->nama_subpaket }}\n*Domain:* {{ $pemesanan->domain }}\n*Harga:* Rp {{ number_format($pemesanan->total_harga, 0, ',', '.') }}`;
+                    let waMessage = `*Pemesanan Baru (Menunggu Pembayaran)*
+                                    *Invoice:* {{ $pemesanan->invoice_number }}
+                                    *Nama:* {{ $pemesanan->user->name }}
+                                    *Email:* {{ $pemesanan->user->email }}
+                                    *Paket:* {{ $pemesanan->subpaket->nama_subpaket }}
+                                    @if($pemesanan->domain)
+                                    *Domain:* {{ $pemesanan->domain }}
+                                    @endif
+                                    *Harga:* Rp {{ number_format($pemesanan->total_harga, 0, ',', '.') }}`;
                     
                     @if ($pemesanan->produk)
                         waMessage += `\n*Desain:* {{ $pemesanan->produk->nama_produk }}`;

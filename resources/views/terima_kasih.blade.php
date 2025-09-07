@@ -13,7 +13,9 @@
             <div class="card shadow-lg border-0 rounded-3 p-4 mb-4 text-start">
                 <h5 class="fw-bold mb-3">Detail Pesanan</h5>
                 <p class="mb-1"><b>Paket:</b> {{ $pemesanan->subpaket->nama_subpaket }}</p>
-                <p class="mb-1"><b>Nama Domain:</b> {{ $pemesanan->domain }}</p>
+                @if (isset($pemesanan->domain))
+                    <p class="mb-1"><b>Nama Domain:</b> {{ $pemesanan->domain }}</p>
+                @endif
                 @if ($pemesanan->produk)
                     <p class="mb-1"><b>Desain Referensi:</b> {{ $pemesanan->produk->nama_produk }}</p>
                 @else
