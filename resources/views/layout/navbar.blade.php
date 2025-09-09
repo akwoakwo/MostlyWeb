@@ -52,15 +52,15 @@
                             </a>
                         </div>
                     @endif
-                    @if (auth()->user()->gambar === null)
-                        <img src="{{ auth()->user()->avatar }}" alt="Logo" width="35" height="35"
-                            class="d-inline-block align-text-top bg-white rounded-circle">
-                    @else
-                        <img src="{{ asset('assets/img/' . auth()->user()->gambar) }}" alt="Logo" width="35"
-                        height="35" class="d-inline-block align-text-top bg-white rounded-circle">
-                    @endif
-                    <div class="dropdown">
-                        <a class="btn fw-bold dropdown-toggle text-center" href="#" role="button" id="userDropdown"
+                    <div class="dropdown d-flex align-items-center mb-3 ms-3 mb-lg-0 ms-lg-0">
+                        @if (auth()->user()->gambar === null)
+                            <img src="{{ auth()->user()->avatar }}" alt="Logo" width="35" height="35"
+                                class="d-inline-block align-text-top bg-white rounded-circle">
+                        @else
+                            <img src="{{ asset('assets/img/' . auth()->user()->gambar) }}" alt="Logo" width="35"
+                            height="35" class="d-inline-block align-text-top bg-white rounded-circle">
+                        @endif
+                        <a class="btn fw-bold dropdown-toggle text-truncate text-center d-inline-block"  href="#" role="button" id="userDropdown"
                             data-bs-toggle="dropdown" aria-expanded="false">
                             {{ Auth::user()->name }}
                         </a>

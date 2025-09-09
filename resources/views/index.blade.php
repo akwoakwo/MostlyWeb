@@ -65,7 +65,7 @@
             </div>
 
             <div class="col-lg-8">
-                <div class="row profil-baris row-cols-1 row-cols-sm-2 g-4 h-100 w-100">
+                <div class="row profil-baris row-cols-1 row-cols-sm-2 row-cols-md-2 g-4 justify-content-center">
                     <div class="col d-flex justify-content-center">
                         <div class="p-4 shadow rounded text-center profil-card2">
                             <img src="{{ asset('assets/img/profil-section1.png') }}" alt="Benefit 1" class="img-fluid mb-3 profil-img2">
